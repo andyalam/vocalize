@@ -1,14 +1,9 @@
-import axios from 'axios';
+var sendJsonResponse = function(res, status, content) {
+  res.status(status);
+  res.json(content);
+}
 
-
-export const FETCH_POSTS = 'FETCH_POSTS';
-
-const API = 'http://localhost:3000/api';
-
-export function fetchPosts() {
-  // TODO: FIX API, REPLACE STATIC WITH THIS CALL INSTEAD
-  //const posts = axios.get(API);
-
+module.exports.getPosts = function(req, res) {
   const posts = [
     {
       user: 'randomuser1435',
@@ -33,8 +28,8 @@ export function fetchPosts() {
     }
   ];
 
-  return {
-    type: FETCH_POSTS,
-    payload: posts
-  }
+  console.log(res.headers);
+  sendJsonResponse(res, 200, {
+    posts
+  });
 }

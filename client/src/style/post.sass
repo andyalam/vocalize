@@ -1,0 +1,39 @@
+.post
+  position: relative
+  border: 1px solid #ccc
+  margin: 15px 0
+  .info
+    //border-right: 1px solid #ccc
+  &__user, &__date
+    word-wrap: break-word
+  &__upvotes
+    position: absolute
+    top: 0
+    right: 0
+    height: 100%
+    width: 30px
+    background: #ccc
+    .up, .down
+      display: flex
+      justify-content: center
+      align-items: center
+      height: 50%
+      background: #fff
+      border-left: 1px solid #ccc
+      &:not(:first-of-type)
+        border-top: 1px solid #ccc
+      &:hover
+        cursor: pointer
+        background: #ccc
+    .up
+      .fa
+        color: #89C149
+      &:hover .fa
+        color: #89C149 * 0.7
+    .down
+      .fa
+        color: #E06D6D
+      &:hover .fa
+        color: #E06D6D
+  .audio-container
+    padding: 0

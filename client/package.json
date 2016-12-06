@@ -1,7 +1,7 @@
 {
-  "name": "redux-simple-starter",
+  "name": "vocalize-client",
   "version": "1.0.0",
-  "description": "Simple starter package for Redux with React and Babel support",
+  "description": "The client that communicates with the Vocalize API.",
   "main": "index.js",
   "engines": {
     "node": "4.1.2",

@@ -12,9 +12,7 @@ class PostListing extends Component {
     console.log('props', this.props);
     return this.props.posts.map((post) => {
       return (
-        <div key={post.user}>
-          {post.user}
-        </div>
+        <Post key={post.username} {...post} />
       );
     });
   }
