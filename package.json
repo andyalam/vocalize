@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "redux-promise": "^0.5.3"
+  }
+}

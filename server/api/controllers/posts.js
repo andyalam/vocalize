@@ -29,7 +29,5 @@ module.exports.getPosts = function(req, res) {
   ];
 
   console.log(res.headers);
-  sendJsonResponse(res, 200, {
-    posts
-  });
+  sendJsonResponse(res, 200, posts);
 }
