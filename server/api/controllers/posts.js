@@ -1,33 +1,28 @@
+var mongoose = require('mongoose');
+var Post = mongoose.model('Post');
+
 var sendJsonResponse = function(res, status, content) {
   res.status(status);
   res.json(content);
 }
 
-module.exports.getPosts = function(req, res) {
-  const posts = [
-    {
-      user: 'randomuser1435',
-      audio: 'audio file here',
-      date: 'date time',
-      upvotes: 12,
-      downvotes: 5
-    },
-    {
-      user: 'randomuser2756',
-      audio: 'audio file here',
-      date: 'date time',
-      upvotes: 12,
-      downvotes: 5
-    },
-    {
-      user: 'randomuser312',
-      audio: 'audio file here',
-      date: 'date time',
-      upvotes: 12,
-      downvotes: 5
-    }
-  ];
+var parsePosts = function(docs) {
+  var posts = [];
 
-  console.log(res.headers);
-  sendJsonResponse(res, 200, posts);
+  docs.map(doc => {
+    posts.push({
+      user: doc.user,
+      date: Date(doc.date),
+      votes: doc.votes
+    });
+  });
+
+  return posts;
+}
+
+module.exports.getPosts = function(req, res) {
+  Post.find({}, (err, posts) => {
+    if (err) sendJsonResponse(res, 400, err);
+    sendJsonResponse(res, 200, parsePosts(posts));
+  });
 }
