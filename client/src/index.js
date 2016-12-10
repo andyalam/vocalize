@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { Router, browserHistory } from 'react-router';
@@ -15,6 +16,8 @@ const createStoreWithMiddleware = applyMiddleware(
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
-    <Router history={browserHistory} routes={routes} />
+    <MuiThemeProvider>
+      <Router history={browserHistory} routes={routes} />
+    </MuiThemeProvider>
   </Provider>
   , document.querySelector('.app'));

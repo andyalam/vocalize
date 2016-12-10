@@ -1,10 +1,12 @@
+$audio-player-height: 50px
+
 .audio-player
-  min-height: 100px
-  border-left: 1px solid #ccc
+  min-height: $audio-player-height
+  .play-button-wrapper, .progress-bar
+    float: left
+  .play-button-wrapper
+    width: 20%
+    min-height: $audio-player-height
   .progress-bar
-    &__outer
-      width: 100%
-      background: #fff
-    &__inner
-      width: 50%
-      background: #ccc
+    width: 80% !important
+    min-height: $audio-player-height
