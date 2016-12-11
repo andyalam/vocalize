@@ -1,3 +1,4 @@
+const path = require('path');
 const mongoose = require('mongoose');
 const Post = mongoose.model('Post');
 
@@ -27,18 +28,33 @@ module.exports.getPosts = function(req, res) {
 }
 
 module.exports.postPost = function(req, res) {
+  if (!req.files) {
+      sendJsonResponse(res, 400, { message: 'No files found.'});
+      return;
+  }
+
   const post = new Post();
+  const recordingPath = path.join(process.env.PWD, '/uploads/file.jpg');
+  const recording = req.files.recording;
 
-  // TODO: save file to server and then save the correct path
-  //       to its corresponding document in the db.
-  const path = '';
-  post.attach('attachment', { path }, (error) => {
-      // attachment is now attached and post.attachment is populated e.g.:
-      // post.attachment.url
+  recording.mv(recordingPath, function(err) {
+    if (err) {
+      sendJsonResponse(res, 400, err);
+      return;
+    }
+    else {
+      res.send('File uploaded!');
+    }
+  });
 
-      // don't forget to save it..
-      post.save((error) => {
-          // post is now persisted
-      })
-  })
+
+  /*post.attach('attachment', { path }, (error) => {
+    // attachment is now attached and post.attachment is populated e.g.:
+    // post.attachment.url
+
+    // don't forget to save it..
+    post.save((error) => {
+      // post is now persisted
+    })
+  })*/
 };

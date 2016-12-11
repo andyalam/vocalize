@@ -6,10 +6,7 @@ export default class AudioPlayer extends Component {
   render() {
     return (
       <div className="audio-player">
-        <div className="play-button-wrapper">
-          <div className="play-button"></div>
-        </div>
-        <LinearProgress mode="determinate" value={20} className="progress-bar"/>
+        <audio controls src="/vendor/test.wav"></audio>
       </div>
     );
   };
