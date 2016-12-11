@@ -1,13 +1,12 @@
-var mongoose = require('mongoose');
-var Post = mongoose.model('Post');
+const mongoose = require('mongoose');
+const Post = mongoose.model('Post');
 
-var sendJsonResponse = function(res, status, content) {
-  res.status(status);
-  res.json(content);
+const sendJsonResponse = function(res, status, content) {
+  res.status(status).json(content);
 }
 
-var parsePosts = function(docs) {
-  var posts = [];
+const parsePosts = function(docs) {
+  const posts = [];
 
   docs.map(doc => {
     posts.push({
@@ -26,3 +25,20 @@ module.exports.getPosts = function(req, res) {
     sendJsonResponse(res, 200, parsePosts(posts));
   });
 }
+
+module.exports.postPost = function(req, res) {
+  const post = new Post();
+
+  // TODO: save file to server and then save the correct path
+  //       to its corresponding document in the db.
+  const path = '';
+  post.attach('attachment', { path }, (error) => {
+      // attachment is now attached and post.attachment is populated e.g.:
+      // post.attachment.url
+
+      // don't forget to save it..
+      post.save((error) => {
+          // post is now persisted
+      })
+  })
+};

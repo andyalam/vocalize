@@ -1,14 +1,25 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const crate = require('mongoose-crate');
+const LocalFS = require('mongoose-crate-localfs');
 
-var voteSchema = new mongoose.Schema({
+const voteSchema = new mongoose.Schema({
   user: String,
   positive: Boolean
 });
 
-var postSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
   user: String,
   date: { type: Date, 'default': Date.now },
   votes: [voteSchema]
+});
+
+postSchema.plugin(crate, {
+  storage: new LocalFS({
+    directory: '/uploads'
+  }),
+  fields: {
+    attachment: {}
+  }
 });
 
 
