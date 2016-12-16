@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { guid } from '../snippets/helpers';
 
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const CREATE_CLIP = 'CREATE_CLIP';

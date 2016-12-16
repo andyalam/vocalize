@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteClip, updateClipName } from '../actions/index';
+import RaisedButton from 'material-ui/RaisedButton';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
+
+import 'style/clip';
 
 class Clip extends Component {
   constructor() {
@@ -25,11 +29,23 @@ class Clip extends Component {
     const { blob, clipName } = this.props;
     const audioURL = window.URL.createObjectURL(blob);
     return (
-      <article className="clip">
-        <audio controls src={audioURL} />
-        <p onClick={this.clipLabelOnClick}>{clipName}</p>
-        <button className="delete" onClick={this.deleteButtonOnClick}>Delete</button>
-      </article>
+      <Card className="clip">
+        <CardText>
+          <p onClick={this.clipLabelOnClick}>{clipName ? clipName: "Untitled"}</p>
+          <audio controls src={audioURL} />
+          <RaisedButton
+            label="Delete"
+            secondary={true}
+            className="delete"
+            onClick={this.deleteButtonOnClick}
+          />
+          <RaisedButton
+            label="Submit"
+            primary={true}
+            className="submit"
+          />
+        </CardText>
+      </Card>
     );
   }
 }

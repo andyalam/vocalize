@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createClip } from '../actions/index';
+import RaisedButton from 'material-ui/RaisedButton'
+
+import 'style/recorder';
 
 class Recorder extends Component {
   constructor() {
@@ -16,7 +19,8 @@ class Recorder extends Component {
     this.state = {
       audioCtx: audioCtx,
       analyser: analyser,
-      chunks: []
+      chunks: [],
+      recording: false
     }
 
     this.draw = this.draw.bind(this);
@@ -38,11 +42,11 @@ class Recorder extends Component {
 
     this.state.analyser.getByteTimeDomainData(dataArray);
 
-    canvasCtx.fillStyle = 'rgb(200, 200, 200)';
+    canvasCtx.fillStyle = '#00bcd4';
     canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
     canvasCtx.lineWidth = 2;
-    canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+    canvasCtx.strokeStyle = '#fff';
 
     canvasCtx.beginPath();
 
@@ -113,22 +117,18 @@ class Recorder extends Component {
     this.state.mediaRecorder.start();
     console.log(this.state.mediaRecorder.state);
     console.log("recorder started");
-    this.refs.record.style.background = "red";
 
-    this.refs.stop.disabled = false;
-    this.refs.record.disabled = true;
+    this.setState({ recording: true });
   }
 
   stopOnClick() {
     this.state.mediaRecorder.stop();
     console.log(this.state.mediaRecorder.state);
     console.log("recorder stopped");
-    this.refs.record.style.background = "";
-    this.refs.record.style.color = "";
+
     // mediaRecorder.requestData();
 
-    this.refs.stop.disabled = true;
-    this.refs.record.disabled = false;
+    this.setState({ recording: false });
   }
 
   mediaRecorderOnStop() {
@@ -158,12 +158,19 @@ class Recorder extends Component {
       <section className="main-controls">
         <canvas ref="canvas" className="visualizer"></canvas>
         <div id="buttons">
-          <button ref="record" className="record" onClick={this.recordOnClick} >Record</button>
-          <button ref="stop" className="stop" onClick={this.stopOnClick} >Stop</button>
+          <RaisedButton
+            label="Record"
+            className="record"
+            onClick={this.recordOnClick}
+            disabled={this.state.recording}
+          />
+          <RaisedButton
+            label="Stop"
+            className="stop"
+            onClick={this.stopOnClick}
+            disabled={!this.state.recording}
+          />
         </div>
-        <section ref="soundClips">
-
-        </section>
       </section>
     );
   }
