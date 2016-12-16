@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import PostsReducer from './posts_reducer.js'
+import PostsReducer from './posts_reducer.js';
+import ClipsReducer from './reducer_clips';
 
 const rootReducer = combineReducers({
-  posts: PostsReducer
+  posts: PostsReducer,
+  clips: ClipsReducer
 });
 
 export default rootReducer;
