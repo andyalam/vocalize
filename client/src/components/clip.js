@@ -25,10 +25,6 @@ class Clip extends Component {
     }
   }
 
-  submitButtonOnClick() {
-    console.log('submit');
-  }
-
   render() {
     const { blob, clipName } = this.props;
     const audioURL = window.URL.createObjectURL(blob);
@@ -37,18 +33,14 @@ class Clip extends Component {
         <CardText>
           <p onClick={this.clipLabelOnClick}>{clipName ? clipName: "Untitled"}</p>
           <audio controls src={audioURL} />
-          <RaisedButton
-            label="Delete"
-            secondary={true}
-            className="delete"
-            onClick={this.deleteButtonOnClick}
-          />
-          <RaisedButton
-            label="Submit"
-            primary={true}
-            className="submit"
-            onClick={this.submitButtonOnClick}
-          />
+          <div className="button-wrapper">
+            <RaisedButton
+              label="Delete"
+              secondary={true}
+              className="delete"
+              onClick={this.deleteButtonOnClick}
+            />
+          </div>
         </CardText>
       </Card>
     );

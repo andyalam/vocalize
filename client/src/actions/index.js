@@ -6,13 +6,11 @@ export const CREATE_CLIP = 'CREATE_CLIP';
 export const DELETE_CLIP = 'DELETE_CLIP';
 export const UPDATE_CLIP_NAME = 'UPDATE_CLIP_NAME';
 
-const API = 'http://localhost:3000/api/posts';
+const API = 'http://localhost:3000/api';
 
 
 export function fetchPosts() {
-  // TODO: FIX API, REPLACE STATIC WITH THIS CALL INSTEAD
-  const posts = axios.get(API);
-  console.log('posts',posts);
+  const posts = axios.get(`${API}/posts`);
 
   return {
     type: FETCH_POSTS,
@@ -22,6 +20,8 @@ export function fetchPosts() {
 
 
 export function createClip(blob, clipName) {
+  //const request = axios.post(`${API}/posts`);
+
   return {
     type: CREATE_CLIP,
     id: guid(),

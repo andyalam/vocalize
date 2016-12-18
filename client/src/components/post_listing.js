@@ -9,7 +9,6 @@ class PostListing extends Component {
   }
 
   renderPosts() {
-    console.log('props', this.props);
     return this.props.posts.map((post) => {
       return (
         <Post key={post.username} {...post} />

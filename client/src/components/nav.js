@@ -23,11 +23,12 @@ export default class Navigation extends Component {
       { text: 'Upload', url: '/upload'},
       { text: 'Test area', url: '/testarea'}
     ];
-    const linkElements = links.map((link) => {
+    const linkElements = links.map((link, index) => {
       return (
         <Link
           to={link.url}
           onClick={this.handleToggle}
+          key={index}
         >
           <MenuItem>{link.text}</MenuItem>
         </Link>
