@@ -23,9 +23,6 @@ const Dropdown = () => {
 }
 
 export default class Navigation extends Component {
-  onLeftIconButtonTouchTap() {
-    console.log('test');
-  }
   componentDidMount() {
     window.appbar = this.refs.appbar1;
   }
@@ -36,7 +33,6 @@ export default class Navigation extends Component {
         ref="appbar1"
         iconElementLeft={<Dropdown />}
         iconClassNameRight="muidocs-icon-navigation-expand-more"
-        onLeftIconButtonTouchTap={this.onLeftIconButtonTouchTap}
       />
     );
   }
