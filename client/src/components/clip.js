@@ -25,6 +25,10 @@ class Clip extends Component {
     }
   }
 
+  submitButtonOnClick() {
+    console.log('submit');
+  }
+
   render() {
     const { blob, clipName } = this.props;
     const audioURL = window.URL.createObjectURL(blob);
@@ -43,6 +47,7 @@ class Clip extends Component {
             label="Submit"
             primary={true}
             className="submit"
+            onClick={this.submitButtonOnClick}
           />
         </CardText>
       </Card>

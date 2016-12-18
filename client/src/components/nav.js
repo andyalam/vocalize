@@ -18,6 +18,22 @@ export default class Navigation extends Component {
   handleToggle = () => this.setState({open: !this.state.open});
 
   render() {
+    const links = [
+      { text: 'Home', url: '/'},
+      { text: 'Upload', url: '/upload'},
+      { text: 'Test area', url: '/testarea'}
+    ];
+    const linkElements = links.map((link) => {
+      return (
+        <Link
+          to={link.url}
+          onClick={this.handleToggle}
+        >
+          <MenuItem>{link.text}</MenuItem>
+        </Link>
+      )
+    });
+
     return (
       <div className="navigation">
         <AppBar
@@ -32,18 +48,7 @@ export default class Navigation extends Component {
           >
             <IconButton><NavigationClose /></IconButton>
           </MenuItem>
-          <Link
-            to={'/'}
-            onClick={this.handleToggle}
-          >
-            <MenuItem>Home</MenuItem>
-          </Link>
-          <Link
-            to={'/upload'}
-            onClick={this.handleToggle}
-          >
-            <MenuItem>Upload</MenuItem>
-          </Link>
+          {linkElements}
         </Drawer>
       </div>
     );
