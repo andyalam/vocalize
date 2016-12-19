@@ -8,3 +8,15 @@ export function guid() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
     s4() + '-' + s4() + s4() + s4();
 }
+
+
+// converts blob to base64
+export function blobToBase64(blob, cb) {
+  var reader = new FileReader();
+  reader.onload = function() {
+    var dataUrl = reader.result;
+    var base64 = dataUrl.split(',')[1];
+    cb(base64);
+  };
+  reader.readAsDataURL(blob);
+};

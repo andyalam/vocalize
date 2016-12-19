@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { guid } from '../snippets/helpers';
+import { guid, blobToBase64 } from '../snippets/helpers';
 
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const CREATE_CLIP = 'CREATE_CLIP';
@@ -20,7 +20,15 @@ export function fetchPosts() {
 
 
 export function createClip(blob, clipName) {
-  //const request = axios.post(`${API}/posts`);
+  blobToBase64(blob, (base64) => {
+    const payload = {
+      payload: {
+        blob: base64,
+        clipName
+      }
+    };
+    const request = axios.post(`${API}/posts`, payload);
+  });
 
   return {
     type: CREATE_CLIP,
