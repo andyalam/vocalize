@@ -38,28 +38,35 @@ module.exports.postPost = function(req, res) {
       return;
   }
 
-  const post = new Post();
+  const post = new Post({ user });
+  const folderPath = `uploads/${user}`;
+  const filePath = `uploads/${user}/file.ogg`;
 
   // decode
   const buf = new Buffer(req.body.payload.blob, 'base64');
 
-  fs.writeFile(`uploads/${user}/file.ogg`, buf, function(err) {
-    if(err) {
-      console.log("err", err);
-    } else {
-      sendJsonResponse(res, 200, {'message': 'file created'});
+  // create folder for user if it does not exist
+  fs.mkdir(folderPath, (err) => {
+    if(err.code !== 'EEXIST') {
+      sendJsonResponse(res, 404, err);
       return;
     }
-  })
+    // write the file
+    fs.writeFile(filePath, buf, (err) => {
+      if(err) {
+        sendJsonResponse(res, 404, err);
+      } else {
+        post.attach('attachment', filePath, (error) => {
+          // attachment is now attached and post.attachment is populated e.g.:
+          // post.attachment.url
 
-
-  /*post.attach('attachment', { path }, (error) => {
-    // attachment is now attached and post.attachment is populated e.g.:
-    // post.attachment.url
-
-    // don't forget to save it..
-    post.save((error) => {
-      // post is now persisted
-    })
-  })*/
+          // don't forget to save it..
+          post.save((error) => {
+            // post is now persisted
+            sendJsonResponse(res, 200, {'message': 'file created'});
+          });
+        })
+      }
+    });
+  });
 };
