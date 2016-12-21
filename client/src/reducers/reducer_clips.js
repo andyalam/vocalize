@@ -1,4 +1,8 @@
-import { CREATE_CLIP, DELETE_CLIP, UPDATE_CLIP_NAME } from '../actions/index';
+import {
+  CREATE_CLIP,
+  DELETE_CLIP,
+  UPDATE_CLIP_NAME
+} from '../actions/index';
 
 const INITIAL_STATE = [];
 

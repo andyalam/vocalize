@@ -10,6 +10,7 @@ const voteSchema = new mongoose.Schema({
 const postSchema = new mongoose.Schema({
   user: String,
   date: { type: Date, 'default': Date.now },
+  blobbase64: { type: String, 'default': '' },
   votes: [voteSchema]
 });
 

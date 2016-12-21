@@ -14,6 +14,7 @@ const parsePosts = function(docs) {
     posts.push({
       user: doc.user,
       date: Date(doc.date),
+      blobbase64: doc.blobbase64,
       votes: doc.votes
     });
   });
@@ -38,7 +39,10 @@ module.exports.postPost = function(req, res) {
       return;
   }
 
-  const post = new Post({ user });
+  const post = new Post({
+    blobbase64: req.body.payload.blob,
+    user
+  });
   const folderPath = `uploads/${user}`;
   const filePath = `uploads/${user}/file.ogg`;
 
@@ -51,6 +55,7 @@ module.exports.postPost = function(req, res) {
       sendJsonResponse(res, 404, err);
       return;
     }
+
     // write the file
     fs.writeFile(filePath, buf, (err) => {
       if(err) {
@@ -68,5 +73,6 @@ module.exports.postPost = function(req, res) {
         })
       }
     });
+
   });
 };
