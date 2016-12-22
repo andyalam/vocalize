@@ -31,6 +31,12 @@ class Recorder extends Component {
     this.mediaRecorderOnDataAvailable = this.mediaRecorderOnDataAvailable.bind(this);
   }
 
+  componentWillUnmount() {
+    // close AudioContext, otherwise hardware will still be bound
+    // and cause issues long-term while using the app
+    this.state.audioCtx.close();
+  }
+
   draw() {
     var canvasCtx = this.state.canvas.getContext("2d");
     var dataArray = new Uint8Array(this.state.analyser.frequencyBinCount);
