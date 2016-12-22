@@ -10,7 +10,6 @@ const fileUpload = require('express-fileupload');
 require('./api/models/db');
 
 const api_routes = require('./api/routes/index');
-const users = require('./api/routes/users');
 
 const app = express();
 
@@ -41,7 +40,6 @@ app.use(function(req, res, next) {
 });
 
 app.use('/api', api_routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
