@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import AudioPlayer from './audio_player';
 import { base64ToBlob } from '../snippets/helpers';
 
 import 'style/post';
@@ -23,7 +22,7 @@ class Post extends Component {
     const contentType = 'audio/ogg';
     const blob = base64ToBlob(this.state.blobbase64, contentType);
     const audioURL = window.URL.createObjectURL(blob);
-    
+
     return (
       <audio controls src={audioURL}></audio>
     );

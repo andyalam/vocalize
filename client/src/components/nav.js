@@ -19,9 +19,11 @@ export default class Navigation extends Component {
 
   render() {
     const links = [
-      { text: 'Home', url: '/'},
+      { text: 'Explore', url: '/'},
       { text: 'Upload', url: '/upload'},
-      { text: 'Test area', url: '/testarea'}
+      { text: 'Test area', url: '/testarea'},
+      { text: 'Register', url: '/register' },
+      { text: 'Login', url: '/login' }
     ];
     const linkElements = links.map((link, index) => {
       return (
