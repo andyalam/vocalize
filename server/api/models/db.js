@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var dbURI = 'mongodb://localhost/vocalize';
+const dbURI = 'mongodb://localhost/vocalize';
 
 mongoose.connect(dbURI);
 

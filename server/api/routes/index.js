@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var ctrlPosts = require('../controllers/posts');
-var ctrlAuth =require('../controllers/authentication');
+const ctrlPosts = require('../controllers/posts');
+const ctrlAuth =require('../controllers/authentication');
 
 // Authentication
 router.post('/register', ctrlAuth.register);

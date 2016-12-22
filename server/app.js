@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 
 require('./api/models/db');
+require('./api/config/passport');
 
 const api_routes = require('./api/routes/index');
 
