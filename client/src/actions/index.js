@@ -2,6 +2,7 @@ import axios from 'axios';
 import { guid, blobToBase64 } from '../snippets/helpers';
 
 // auth
+export const LOGIN = 'LOGIN';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -15,12 +16,6 @@ export const UPDATE_CLIP_NAME = 'UPDATE_CLIP_NAME';
 const API = 'http://localhost:3000/api';
 
 
-/*
-  creds = {
-    username,
-    password
-  }
-*/
 function requestLogin(creds) {
   return {
     type: LOGIN_REQUEST,
@@ -51,7 +46,17 @@ function loginError(message) {
 }
 
 export function loginUser(creds) {
-  requestLogin();
+  const login = axios.post(`${API}/login`, creds)
+                  .catch(() => {
+                    return {
+                      type: LOGIN_FAILURE,
+                    };
+                  })
+
+  return {
+    type: LOGIN_REQUEST,
+    payload: login
+  };
 }
 
 

@@ -44,6 +44,8 @@ module.exports.login = function(req, res) {
   passport.authenticate('local', function(err, user, info) {
     var token;
 
+    console.log(info);
+
     if (err) {
       sendJsonResponse(res, 404, err);
       return;

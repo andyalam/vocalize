@@ -26,7 +26,7 @@ class LoginPage extends Component {
   handleSubmit(e) {
     e.preventDefault();
     loginUser({
-      username: this.state.username,
+      email: this.state.username,
       password: this.state.password
     });
   }
@@ -38,6 +38,8 @@ class LoginPage extends Component {
     const newState = {};
     newState[name] = e.target.value;
     this.setState(newState);
+
+    console.log(this.props.auth);
   }
 
   render() {
@@ -74,4 +76,9 @@ class LoginPage extends Component {
   }
 }
 
-export default connect(null, { loginUser })(LoginPage);
+function mapStateToProps(state) {
+  console.log(state.auth);
+  return { auth: state.auth };
+}
+
+export default connect(mapStateToProps, { loginUser })(LoginPage);

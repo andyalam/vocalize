@@ -21,6 +21,13 @@ export default function(state = INITAL_STATE, action) {
         isFetching: action.isFetching
       };
 
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: 'Invalid Login'
+      };
+
     default:
       return state;
   }

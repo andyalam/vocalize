@@ -9,6 +9,12 @@ class PostListing extends Component {
   }
 
   renderPosts() {
+    if (!this.props.posts.length) {
+      return (
+        <div>No posts yet! Stay tuned.</div>
+      )
+    }
+
     return this.props.posts.map((post) => {
       return (
         <Post key={post.username} {...post} />
