@@ -9,6 +9,7 @@ import App from './components/app';
 import reducers from './reducers';
 import routes from './routes';
 import promise from 'redux-promise';
+import thunk from 'redux-thunk';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 // Needed for onTouchTap
@@ -16,7 +17,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 const createStoreWithMiddleware = applyMiddleware(
-  promise
+  promise,
+  thunk
 )(createStore);
 
 ReactDOM.render(

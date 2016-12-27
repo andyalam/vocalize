@@ -2,7 +2,7 @@ import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS
 } from '../actions/index';
 
-const INITAL_STATE = {
+const INITIAL_STATE = {
   isFetching: false,
   isAuthenticated: false,
   token: null,
@@ -13,13 +13,20 @@ const INITAL_STATE = {
   }
 };
 
-export default function(state = INITAL_STATE, action) {
+export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
     case LOGIN_REQUEST:
       return {
         ...state,
         isFetching: action.isFetching
       };
+
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        token: action.id_token,
+        errorMessage: ''
+      }
 
     case LOGIN_FAILURE:
       return {

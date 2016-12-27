@@ -19,13 +19,13 @@ class LoginPage extends Component {
       password: ''
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    //this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);;
   }
 
   handleSubmit(e) {
+    console.log(this.props.auth);
     e.preventDefault();
-    loginUser({
+    this.props.loginUser({
       email: this.state.username,
       password: this.state.password
     });
@@ -38,8 +38,6 @@ class LoginPage extends Component {
     const newState = {};
     newState[name] = e.target.value;
     this.setState(newState);
-
-    console.log(this.props.auth);
   }
 
   render() {
@@ -63,6 +61,9 @@ class LoginPage extends Component {
               value={this.state.password}
               onChange={this.handleChange.bind(this, 'password')}
             />
+            {  this.props.auth.errorMessage &&
+                <div className="error-message">{ this.props.auth.errorMessage }</div>
+            }
             <RaisedButton
               label="Login"
               primary={true}

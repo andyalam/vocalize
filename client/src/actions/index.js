@@ -27,11 +27,12 @@ function requestLogin(creds) {
 
 
 function receiveLogin(user) {
+  console.log(user.data.token);
   return {
     type: LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    id_token: user.id_token
+    id_token: user.data.token
   }
 }
 
@@ -46,16 +47,15 @@ function loginError(message) {
 }
 
 export function loginUser(creds) {
-  const login = axios.post(`${API}/login`, creds)
-                  .catch(() => {
-                    return {
-                      type: LOGIN_FAILURE,
-                    };
-                  })
-
-  return {
-    type: LOGIN_REQUEST,
-    payload: login
+  return dispatch => {
+    axios.post(`${API}/login`, creds)
+      .then((response) => {
+        console.log('response', response)
+        dispatch(receiveLogin(response));
+      })
+      .catch((response) => {
+        dispatch(loginError('oops'));
+      });
   };
 }
 
