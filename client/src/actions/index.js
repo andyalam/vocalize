@@ -50,13 +50,33 @@ export function loginUser(creds) {
   return dispatch => {
     axios.post(`${API}/login`, creds)
       .then((response) => {
-        console.log('response', response)
         dispatch(receiveLogin(response));
       })
       .catch((response) => {
         dispatch(loginError('oops'));
       });
   };
+}
+
+
+function receiveRegister(creds) {
+
+}
+
+function registerError(err) {
+  
+}
+
+export function registerUser(creds) {
+  return dispatch => {
+    axios.post(`${API}/register`, creds)
+      .then((response) => {
+        dispatch(receiveRegister(response));
+      })
+      .catch((response) => {
+        dispatch(registerError('Invalid'));
+      })
+  }
 }
 
 

@@ -25,6 +25,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         token: action.id_token,
+        isAuthenticated: action.isAuthenticated,
         errorMessage: ''
       }
 

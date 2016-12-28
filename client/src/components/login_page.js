@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import {Card, CardText} from 'material-ui/Card';
@@ -11,9 +11,15 @@ import 'style/auth';
 
 class LoginPage extends Component {
 
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
   constructor(props) {
     super(props);
 
+    // separate from redux store user/pass,
+    // only used for controlled inputs in this component
     this.state = {
       username: '',
       password: ''
@@ -21,6 +27,7 @@ class LoginPage extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);;
   }
+
 
   handleSubmit(e) {
     console.log(this.props.auth);
@@ -41,6 +48,10 @@ class LoginPage extends Component {
   }
 
   render() {
+    if (this.props.auth.isAuthenticated) {
+      this.context.router.push('/');
+    }
+
     return (
       <form
         onSubmit={this.handleSubmit}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
@@ -9,7 +10,7 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 import 'style/nav';
 
-export default class Navigation extends Component {
+class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {open: false};
@@ -18,13 +19,19 @@ export default class Navigation extends Component {
   handleToggle = () => this.setState({open: !this.state.open});
 
   render() {
-    const links = [
+    let links = [
       { text: 'Explore', url: '/'},
-      { text: 'Upload', url: '/upload'},
       { text: 'Test area', url: '/testarea'},
-      { text: 'Register', url: '/register' },
-      { text: 'Login', url: '/login' }
     ];
+
+    if (!this.props.auth.isAuthenticated) {
+      links.push({ text: 'Register', url: '/register' },
+                 { text: 'Login', url: '/login' });
+    } else {
+      links.push({ text: 'Upload', url: '/upload'},
+                 { text: 'Logout', url: '/logout' })
+    }
+
     const linkElements = links.map((link, index) => {
       return (
         <Link
@@ -57,3 +64,9 @@ export default class Navigation extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return { auth: state.auth };
+}
+
+export default connect(mapStateToProps, null)(Navigation);
