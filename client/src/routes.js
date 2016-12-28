@@ -7,6 +7,7 @@ import UploadPage from './components/upload_page';
 import TestComponent from './components/test_component';
 import RegisterPage from './components/register_page';
 import LoginPage from './components/login_page';
+import Logout from './components/logout';
 
 export default (
   <Route path='/' component={App}>
@@ -14,6 +15,7 @@ export default (
     <Route path='/upload' component={UploadPage} />
     <Route path='/register' component={RegisterPage} />
     <Route path='/login' component={LoginPage} />
+    <Route path='/logout' component={Logout} />
     <Route path='/testarea' component={TestComponent} />
   </Route>
 );

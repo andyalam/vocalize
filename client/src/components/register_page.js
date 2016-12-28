@@ -27,9 +27,12 @@ class RegisterPage extends Component {
   }
 
   handleSubmit(e) {
-    console.log(this.props.auth);
     e.preventDefault();
-    // TODO: use registerUser action
+
+    this.props.registerUser({
+      username: this.state.reqUsername,
+      password: this.state.reqPassword
+    });
   }
 
   // Generalized handler for username/password
