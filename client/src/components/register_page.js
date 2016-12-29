@@ -20,18 +20,29 @@ class RegisterPage extends Component {
 
     this.state = {
       reqUsername: '',
-      reqPassword: ''
+      reqEmail: '',
+      reqPassword1: '',
+      reqPassword2: '',
+      error: ''
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);;
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    const { reqUsername, reqEmail, reqPassword1, reqPassword2 } = this.state;
+
+    if (reqPassword1 !== reqPassword2) {
+      this.setState({
+        errror: 'Passwords do not match'
+      });
+    }
 
     this.props.registerUser({
-      username: this.state.reqUsername,
-      password: this.state.reqPassword
+      name: reqUsername,
+      email: reqEmail,
+      password: reqPassword1
     });
   }
 
@@ -45,6 +56,10 @@ class RegisterPage extends Component {
   }
 
   render() {
+    if (this.props.auth.isAuthenticated) {
+      this.context.router.push('/');
+    }
+
     return (
       <form
         onSubmit={this.handleSubmit}
@@ -53,22 +68,39 @@ class RegisterPage extends Component {
           <h2>Register</h2>
           <CardText>
             <TextField
-              hintText='User'
+              hintText='Username'
               className='input-field'
               value={this.state.reqUsername}
               onChange={this.handleChange.bind(this, 'reqUsername')}
             />
             <TextField
-              hintText='Password'
+              hintText='Email'
+              className='input-field'
+              value={this.state.reqEmail}
+              onChange={this.handleChange.bind(this, 'reqEmail')}
+            />
+            <TextField
+              hintText='Enter Password'
               type="password"
               className='input-field'
-              value={this.state.reqPassword}
-              onChange={this.handleChange.bind(this, 'reqPassword')}
+              value={this.state.reqPassword1}
+              onChange={this.handleChange.bind(this, 'reqPassword1')}
             />
+            <TextField
+              hintText='Repeat Password'
+              type="password"
+              className='input-field'
+              value={this.state.reqPassword2}
+              onChange={this.handleChange.bind(this, 'reqPassword2')}
+            />
+            { this.props.auth.errorMessage &&
+              <div className="error-message">{ this.props.auth.errorMessage }</div>
+            }
             <RaisedButton
               label="Register"
               primary={true}
               className="submit-form"
+              type="submit"
             />
           </CardText>
         </Card>

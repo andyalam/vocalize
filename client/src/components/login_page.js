@@ -60,7 +60,7 @@ class LoginPage extends Component {
           <h2>Login</h2>
           <CardText>
             <TextField
-              hintText='User'
+              hintText='Username'
               className='input-field'
               value={this.state.username}
               onChange={this.handleChange.bind(this, 'username')}
@@ -72,8 +72,8 @@ class LoginPage extends Component {
               value={this.state.password}
               onChange={this.handleChange.bind(this, 'password')}
             />
-            {  this.props.auth.errorMessage &&
-                <div className="error-message">{ this.props.auth.errorMessage }</div>
+            { this.props.auth.errorMessage &&
+              <div className="error-message">{ this.props.auth.errorMessage }</div>
             }
             <RaisedButton
               label="Login"

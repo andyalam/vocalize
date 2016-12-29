@@ -2,6 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../actions/index';
 
+
+// Basic logout, redirecting to this Component
+// logs the user out and redirects to the homepage.
+// This is used to simplify the Navbar component.
 class Logout extends Component {
   static contextTypes = {
     router: PropTypes.object
@@ -10,6 +14,7 @@ class Logout extends Component {
   render() {
     this.props.logout();
     this.context.router.push('/');
+    return null;
   }
 }
 

@@ -42,14 +42,18 @@ export default function(state = INITIAL_STATE, action) {
       };
 
     case REGISTER_SUCCESS:
+      console.log('success', action);
       return {
-        ...state
+        ...state,
+        isFetching: false,
+        isAuthenticated: true,
+        id_token: action.id_token
       }
 
     case REGISTER_FAILURE:
       return {
         ...state,
-        errorMessage: 'Registration failed'
+        errorMessage: action.errorMessage
       }
 
     case LOGOUT:

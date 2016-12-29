@@ -62,11 +62,17 @@ export function loginUser(creds) {
 
 
 function receiveRegister(creds) {
-
+  return {
+    type: REGISTER_SUCCESS,
+    id_token: user.data.token
+  }
 }
 
 function registerError(err) {
-
+  return {
+    type: REGISTER_FAILURE,
+    errorMessage: err.toString()
+  }
 }
 
 export function registerUser(creds) {
@@ -76,7 +82,7 @@ export function registerUser(creds) {
         dispatch(receiveRegister(response));
       })
       .catch((response) => {
-        dispatch(registerError('Invalid'));
+        dispatch(registerError(response));
       })
   }
 }
