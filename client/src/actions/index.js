@@ -28,13 +28,13 @@ function requestLogin(creds) {
 }
 
 
-function receiveLogin(user) {
-  console.log(user.data.token);
+function receiveLogin(req) {
+  console.log(req.data.token);
   return {
     type: LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    id_token: user.data.token
+    id_token: req.data.token
   }
 }
 
@@ -61,10 +61,10 @@ export function loginUser(creds) {
 }
 
 
-function receiveRegister(creds) {
+function receiveRegister(req) {
   return {
     type: REGISTER_SUCCESS,
-    id_token: user.data.token
+    id_token: req.data.token
   }
 }
 
