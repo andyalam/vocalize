@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createClip } from '../actions/index';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -7,6 +7,11 @@ import { decodeJWT } from '../snippets/helpers';
 import 'style/recorder';
 
 class Recorder extends Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
   constructor() {
     super();
     navigator.getUserMedia = ( navigator.getUserMedia ||
@@ -30,6 +35,13 @@ class Recorder extends Component {
     this.stopOnClick = this.stopOnClick.bind(this);
     this.mediaRecorderOnStop = this.mediaRecorderOnStop.bind(this);
     this.mediaRecorderOnDataAvailable = this.mediaRecorderOnDataAvailable.bind(this);
+  }
+
+  componentWillMount() {
+    // prevent unauth users from accessing this page
+    if (!this.props.auth.isAuthenticated) {
+      this.context.router.push('/');
+    }
   }
 
   componentWillUnmount() {
@@ -145,7 +157,7 @@ class Recorder extends Component {
 
     const blob = new Blob(this.state.chunks, { 'type' : 'audio/ogg; codecs=opus' });
     const { username } = decodeJWT(this.props.auth.token);
-    
+
     this.props.createClip(blob, clipName, username);
 
     // reset chunks
