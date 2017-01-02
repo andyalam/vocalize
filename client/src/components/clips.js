@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import Clip from './clip';
 
 class Clips extends Component {
+  componentWillMount() {
+
+  }
+
   render() {
     const clips = this.props.clips.map(clip => {
       return (

@@ -2,7 +2,6 @@ import axios from 'axios';
 import { guid, blobToBase64 } from '../snippets/helpers';
 
 // auth
-export const LOGIN = 'LOGIN';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -10,10 +9,18 @@ export const LOGOUT = 'LOGOUT';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 
+
+/*
+Posts and Clips are essentially the same except that:
+1) Posts are considered public
+2) Clips can only be accessed by the person who recorded/created them.
+*/
+
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const CREATE_CLIP = 'CREATE_CLIP';
 export const DELETE_CLIP = 'DELETE_CLIP';
 export const UPDATE_CLIP_NAME = 'UPDATE_CLIP_NAME';
+export const FETCH_CLIPS = 'FETCH_CLIPS';
 
 const API = 'http://localhost:3000/api';
 
@@ -29,7 +36,6 @@ function requestLogin(creds) {
 
 
 function receiveLogin(req) {
-  console.log(req.data.token);
   return {
     type: LOGIN_SUCCESS,
     isFetching: false,
@@ -138,4 +144,9 @@ export function updateClipName(id, newName) {
     id,
     newName
   }
+}
+
+
+export function fetchClips() {
+
 }

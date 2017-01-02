@@ -11,11 +11,7 @@ const INITIAL_STATE = {
   isFetching: false,
   isAuthenticated: false,
   token: null,
-  errorMessage: '',
-  creds: {
-    username: '',
-    password: ''
-  }
+  errorMessage: ''
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -24,7 +20,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         isFetching: action.isFetching
-      };
+      }
 
     case LOGIN_SUCCESS:
       return {
@@ -39,10 +35,9 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         isFetching: false,
         errorMessage: 'Invalid Login'
-      };
+      }
 
     case REGISTER_SUCCESS:
-      console.log('success', action);
       return {
         ...state,
         isFetching: false,
