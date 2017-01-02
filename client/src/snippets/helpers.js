@@ -45,3 +45,12 @@ export function base64ToBlob(b64Data, contentType, sliceSize) {
   const blob = new Blob(byteArrays, {type: contentType});
   return blob;
 }
+
+
+export function decodeJWT(token) {
+  const payload = JSON.parse(window.atob(token.split('.')[1]));
+  return {
+    username: payload.name,
+    email: payload.email
+  };
+}

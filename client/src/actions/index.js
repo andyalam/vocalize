@@ -110,13 +110,12 @@ export function fetchPosts() {
 }
 
 
-export function createClip(blob, clipName) {
+export function createClip(blob, clipName, username) {
   blobToBase64(blob, (base64) => {
     const payload = {
-      payload: {
-        blob: base64,
-        clipName
-      }
+      blob: base64,
+      clipName,
+      username
     };
     const request = axios.post(`${API}/posts`, payload);
   });

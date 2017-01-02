@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createClip } from '../actions/index';
-import RaisedButton from 'material-ui/RaisedButton'
+import RaisedButton from 'material-ui/RaisedButton';
+import { decodeJWT } from '../snippets/helpers';
 
 import 'style/recorder';
 
@@ -143,7 +144,9 @@ class Recorder extends Component {
     var clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
 
     const blob = new Blob(this.state.chunks, { 'type' : 'audio/ogg; codecs=opus' });
-    this.props.createClip(blob, clipName);
+    const { username } = decodeJWT(this.props.auth.token);
+    
+    this.props.createClip(blob, clipName, username);
 
     // reset chunks
     this.setState({
@@ -182,5 +185,9 @@ class Recorder extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return { auth: state.auth };
+}
 
-export default connect(null, { createClip })(Recorder);
+
+export default connect(mapStateToProps, { createClip })(Recorder);
