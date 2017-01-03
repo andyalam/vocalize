@@ -4,7 +4,7 @@ import { fetchPosts } from '../actions/index';
 import Post from './post';
 
 class PostListing extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchPosts();
   }
 
@@ -15,9 +15,9 @@ class PostListing extends Component {
       )
     }
 
-    return this.props.posts.map((post) => {
+    return this.props.posts.map((post, index) => {
       return (
-        <Post key={post.username} {...post} />
+        <Post key={index} {...post} />
       );
     });
   }

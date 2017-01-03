@@ -30,7 +30,6 @@ class LoginPage extends Component {
 
 
   handleSubmit(e) {
-    console.log(this.props.auth);
     e.preventDefault();
     this.props.loginUser({
       email: this.state.username,
@@ -50,6 +49,7 @@ class LoginPage extends Component {
   render() {
     if (this.props.auth.isAuthenticated) {
       this.context.router.push('/');
+      return null;
     }
 
     return (

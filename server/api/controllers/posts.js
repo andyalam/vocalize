@@ -13,7 +13,7 @@ const parsePosts = function(docs) {
   docs.map(doc => {
     posts.push({
       user: doc.user,
-      date: Date(doc.date),
+      date: doc.date.toUTCString(),
       blobbase64: doc.blobbase64,
       votes: doc.votes
     });
@@ -23,10 +23,13 @@ const parsePosts = function(docs) {
 }
 
 module.exports.getPosts = function(req, res) {
-  Post.find({}, (err, posts) => {
-    if (err) sendJsonResponse(res, 400, err);
-    sendJsonResponse(res, 200, parsePosts(posts));
-  });
+  Post
+    .find({})
+    .sort({ date: -1 })
+    .exec((err, posts) => {
+      if (err) sendJsonResponse(res, 400, err);
+      sendJsonResponse(res, 200, parsePosts(posts));
+    })
 }
 
 module.exports.postPost = function(req, res) {
@@ -41,7 +44,7 @@ module.exports.postPost = function(req, res) {
     blobbase64: blob,
     user: username
   });
-  
+
   post.save((error) => {
     sendJsonResponse(res, 200, {'message': 'file created'});
   });

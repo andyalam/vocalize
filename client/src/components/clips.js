@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Clip from './clip';
 
 class Clips extends Component {
-  componentWillMount() {
+  componentDidMount() {
 
   }
 

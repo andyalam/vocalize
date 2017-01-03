@@ -11,8 +11,11 @@ class Logout extends Component {
     router: PropTypes.object
   };
 
-  render() {
+  componentWillMount() {
     this.props.logout();
+  }
+
+  render() {
     this.context.router.push('/');
     return null;
   }
