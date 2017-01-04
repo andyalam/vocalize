@@ -9,7 +9,7 @@ import {
 
 import { loadState } from '../snippets/helpers';
 
-const persistedState = loadState().auth;
+const persistedState = loadState() ? loadState().auth : null;
 
 const INITIAL_STATE = {
   isFetching: false,
