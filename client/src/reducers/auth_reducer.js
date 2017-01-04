@@ -57,7 +57,12 @@ export default function(state = INITIAL_STATE, action) {
       }
 
     case LOGOUT:
-      return INITIAL_STATE;
+      return {
+        ...state,
+        isAuthenticated: false,
+        token: null,
+        errorMessage: ''
+      };
 
     default:
       return state;
