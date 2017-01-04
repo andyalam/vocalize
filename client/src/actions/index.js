@@ -147,5 +147,5 @@ export function updateClipName(id, newName) {
 
 
 export function fetchClips() {
-
+  const clips = axios.get(`${API}/clips`);
 }

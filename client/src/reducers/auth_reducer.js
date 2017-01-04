@@ -7,11 +7,16 @@ import {
   LOGOUT
 } from '../actions/index';
 
+import { loadState } from '../snippets/helpers';
+
+const persistedState = loadState().auth;
+
 const INITIAL_STATE = {
   isFetching: false,
   isAuthenticated: false,
   token: null,
-  errorMessage: ''
+  errorMessage: '',
+  ...persistedState
 };
 
 export default function(state = INITIAL_STATE, action) {

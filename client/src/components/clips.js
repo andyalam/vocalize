@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Clip from './clip';
+import { fetchClips } from '../actions/index';
+import { decodeJWT } from '../snippets/helpers';
 
 class Clips extends Component {
   componentDidMount() {
-
+    const { username } = decodeJWT(this.props.auth.token);
+    this.props.fetchClips();
   }
 
   render() {
@@ -23,7 +26,10 @@ class Clips extends Component {
 }
 
 function mapStateToProps(state) {
-  return { clips: state.clips };
+  return {
+    auth: state.auth,
+    clips: state.clips
+  };
 }
 
-export default connect(mapStateToProps, null)(Clips);
+export default connect(mapStateToProps, { fetchClips })(Clips);

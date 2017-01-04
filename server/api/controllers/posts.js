@@ -25,6 +25,7 @@ const parsePosts = function(docs) {
 module.exports.getPosts = function(req, res) {
   Post
     .find({})
+    .limit(30)
     .sort({ date: -1 })
     .exec((err, posts) => {
       if (err) sendJsonResponse(res, 400, err);
@@ -51,5 +52,8 @@ module.exports.postPost = function(req, res) {
 };
 
 module.exports.getClips = function(req, res) {
+  const { username } = req.body;
 
+  //Post
+  //  .find
 };
