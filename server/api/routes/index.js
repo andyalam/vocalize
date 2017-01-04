@@ -18,6 +18,6 @@ router.post('/login', ctrlAuth.login);
 
 router.get('/posts', ctrlPosts.getPosts);
 router.post('/posts', ctrlPosts.postPost);
-router.get('/:username/clips', ctrlPosts.getClips);
+router.get('/:user/clips', ctrlPosts.getClips);
 
 module.exports = router;

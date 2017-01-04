@@ -1,20 +1,21 @@
 import {
+  FETCH_CLIPS,
   CREATE_CLIP,
   DELETE_CLIP,
-  UPDATE_CLIP_NAME
+  UPDATE_CLIP_NAME,
+  CLIP_UPLOAD_FAILED
 } from '../actions/index';
 
 const INITIAL_STATE = [];
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {
+    case FETCH_CLIPS:
+      return action.payload.data;
+
     case CREATE_CLIP:
-      const clip = {
-        blob: action.blob,
-        id: action.id,
-        clipName: action.clipName
-      }
-      return [ clip, ...state ];
+      // may want to trigger loader here eventually
+      return state;
 
     case DELETE_CLIP:
       return state.filter((clip) => clip.id != action.id);

@@ -21,6 +21,7 @@ export const CREATE_CLIP = 'CREATE_CLIP';
 export const DELETE_CLIP = 'DELETE_CLIP';
 export const UPDATE_CLIP_NAME = 'UPDATE_CLIP_NAME';
 export const FETCH_CLIPS = 'FETCH_CLIPS';
+export const CLIP_UPLOAD_FAILED = 'CLIP_UPLOAD_FAILED';
 
 const API = 'http://localhost:3000/api';
 
@@ -57,10 +58,10 @@ function loginError(message) {
 export function loginUser(creds) {
   return dispatch => {
     axios.post(`${API}/login`, creds)
-      .then((response) => {
+      .then(response => {
         dispatch(receiveLogin(response));
       })
-      .catch((response) => {
+      .catch(response => {
         dispatch(loginError('oops'));
       });
   };
@@ -110,21 +111,30 @@ export function fetchPosts() {
 }
 
 
-export function createClip(blob, clipName, username) {
-  blobToBase64(blob, (base64) => {
-    const payload = {
-      blob: base64,
-      clipName,
-      username
-    };
-    const request = axios.post(`${API}/posts`, payload);
-  });
-
+function createClipFail(response) {
   return {
-    type: CREATE_CLIP,
-    id: guid(),
-    clipName,
-    blob
+    type: CLIP_UPLOAD_FAILED
+  };
+}
+
+
+export function createClip(blob, clipName, username) {
+  return dispatch => {
+    blobToBase64(blob, (base64) => {
+      const payload = {
+        blob: base64,
+        clipName,
+        username
+      };
+
+      axios.post(`${API}/posts`, payload)
+        .then(response => {
+          dispatch(fetchClips(payload.username));
+        })
+        .catch(response => {
+          dispatch(createClipFail(response));
+        });
+    });
   }
 }
 
@@ -146,6 +156,11 @@ export function updateClipName(id, newName) {
 }
 
 
-export function fetchClips() {
-  const clips = axios.get(`${API}/clips`);
+export function fetchClips(username) {
+  const clips = axios.get(`${API}/${username}/clips`);
+
+  return {
+    type: FETCH_CLIPS,
+    payload: clips
+  };
 }

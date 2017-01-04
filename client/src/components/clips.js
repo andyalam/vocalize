@@ -7,13 +7,13 @@ import { decodeJWT } from '../snippets/helpers';
 class Clips extends Component {
   componentDidMount() {
     const { username } = decodeJWT(this.props.auth.token);
-    this.props.fetchClips();
+    this.props.fetchClips(username);
   }
 
   render() {
-    const clips = this.props.clips.map(clip => {
+    const clips = this.props.clips.map((clip, index) => {
       return (
-        <Clip key={clip.id} {...clip}/>
+        <Clip key={index} {...clip}/>
       );
     });
 

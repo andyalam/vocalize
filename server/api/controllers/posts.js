@@ -52,8 +52,13 @@ module.exports.postPost = function(req, res) {
 };
 
 module.exports.getClips = function(req, res) {
-  const { username } = req.body;
+  const { user } = req.params;
 
-  //Post
-  //  .find
+  Post
+    .find({ user })
+    .sort({ date: -1 })
+    .exec((err, posts) => {
+      if (err) sendJsonResponse(res, 400, err);
+      sendJsonResponse(res, 200, parsePosts(posts));
+    })
 };

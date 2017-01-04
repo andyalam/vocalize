@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { deleteClip, updateClipName } from '../actions/index';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
+import { base64ToBlob } from '../snippets/helpers';
 
 import 'style/clip';
 
@@ -26,7 +27,8 @@ class Clip extends Component {
   }
 
   render() {
-    const { blob, clipName } = this.props;
+    const { clipName, blobbase64 } = this.props;
+    const blob = base64ToBlob(blobbase64);
     const audioURL = window.URL.createObjectURL(blob);
     return (
       <Card className="clip">
