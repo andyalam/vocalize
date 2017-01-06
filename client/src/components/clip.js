@@ -20,20 +20,23 @@ class Clip extends Component {
 
   clipLabelOnClick() {
     const { clipName, id } = this.props;
-    const newClipName = prompt('Enter a new name for your sound clip?');
+    const newClipName = prompt('Enter a new description for your sound clip?');
     if(newClipName !== null && newClipName !== clipName) {
       this.props.updateClipName(id, newClipName);
     }
   }
 
   render() {
-    const { clipName, blobbase64 } = this.props;
+    const { clipName, blobbase64, description } = this.props;
     const blob = base64ToBlob(blobbase64);
     const audioURL = window.URL.createObjectURL(blob);
     return (
       <Card className="clip">
         <CardText>
-          <p onClick={this.clipLabelOnClick}>{clipName ? clipName: "Untitled"}</p>
+          <div onClick={this.clipLabelOnClick}>
+            <h6>Description: <small>(tap to update)</small></h6>
+            <p>{description ? description: ""}</p>
+          </div>
           <audio controls src={audioURL} />
           <div className="button-wrapper">
             <RaisedButton

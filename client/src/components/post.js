@@ -7,14 +7,15 @@ import 'style/post';
 class Post extends Component {
   constructor(props) {
     super();
-    const { user, audio, date, upvotes, downvotes, blobbase64 } = props;
+    const { user, audio, date, upvotes, downvotes, blobbase64, description } = props;
     this.state = {
       user,
       audio,
       date,
       upvotes,
       downvotes,
-      blobbase64
+      blobbase64,
+      description
     }
   }
 
@@ -29,7 +30,7 @@ class Post extends Component {
   }
 
   render() {
-    const { user, audio, date, upvotes, downvotes } = this.state;
+    const { user, audio, date, upvotes, downvotes, description } = this.state;
     return (
       <Card className="post">
         <CardHeader
@@ -40,6 +41,11 @@ class Post extends Component {
         <div className="audio-player">
           {this.renderAudio()}
         </div>
+        { description &&
+          <CardText>
+            {description}
+          </CardText>
+        }
       </Card>
     );
   }

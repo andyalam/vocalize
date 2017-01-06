@@ -32,7 +32,6 @@ class PostListing extends Component {
 }
 
 function mapStateToProps(state) {
-  //console.log('redux state:', state);
   return { posts: state.posts.all };
 }
 

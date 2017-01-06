@@ -153,7 +153,7 @@ class Recorder extends Component {
   mediaRecorderOnStop() {
     console.log("data available after MediaRecorder.stop() called.");
 
-    var clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
+    var clipName = prompt('Enter a name/description for your sound clip?','My unnamed clip');
 
     const blob = new Blob(this.state.chunks, { 'type' : 'audio/ogg; codecs=opus' });
     const { username } = decodeJWT(this.props.auth.token);

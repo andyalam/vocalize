@@ -14,8 +14,9 @@ const parsePosts = function(docs) {
     posts.push({
       user: doc.user,
       date: doc.date.toUTCString(),
-      blobbase64: doc.blobbase64,
-      votes: doc.votes
+      votes: doc.votes,
+      description: doc.description,
+      blobbase64: doc.blobbase64
     });
   });
 
@@ -34,7 +35,9 @@ module.exports.getPosts = function(req, res) {
 }
 
 module.exports.postPost = function(req, res) {
-  const { blob, username } = req.body;
+  const { blob, username, clipName } = req.body;
+
+  console.log('clipname', clipName);
 
   if (!blob || !username) {
       sendJsonResponse(res, 400, { message: 'No file found.'});
@@ -43,7 +46,8 @@ module.exports.postPost = function(req, res) {
 
   const post = new Post({
     blobbase64: blob,
-    user: username
+    user: username,
+    description: clipName
   });
 
   post.save((error) => {
