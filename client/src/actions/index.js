@@ -118,7 +118,7 @@ function createClipFail(response) {
 }
 
 
-export function createClip(blob, clipName, username) {
+export function createClip(blob, clipName, username, token) {
   return dispatch => {
     blobToBase64(blob, (base64) => {
       const payload = {
@@ -127,7 +127,11 @@ export function createClip(blob, clipName, username) {
         username
       };
 
-      axios.post(`${API}/posts`, payload)
+      axios.post(`${API}/posts`, payload, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
         .then(response => {
           dispatch(fetchClips(payload.username));
         })

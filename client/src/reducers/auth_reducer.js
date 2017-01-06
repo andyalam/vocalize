@@ -47,7 +47,7 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         isFetching: false,
         isAuthenticated: true,
-        id_token: action.id_token
+        token: action.id_token
       }
 
     case REGISTER_FAILURE:

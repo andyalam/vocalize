@@ -158,7 +158,7 @@ class Recorder extends Component {
     const blob = new Blob(this.state.chunks, { 'type' : 'audio/ogg; codecs=opus' });
     const { username } = decodeJWT(this.props.auth.token);
 
-    this.props.createClip(blob, clipName, username);
+    this.props.createClip(blob, clipName, username, this.props.auth.token);
 
     // reset chunks
     this.setState({

@@ -17,7 +17,7 @@ router.post('/login', ctrlAuth.login);
 
 
 router.get('/posts', ctrlPosts.getPosts);
-router.post('/posts', ctrlPosts.postPost);
+router.post('/posts', auth, ctrlPosts.postPost);
 router.get('/:user/clips', ctrlPosts.getClips);
 
 module.exports = router;
