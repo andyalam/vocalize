@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -9,7 +10,11 @@ import {
 
 import { loadState } from '../snippets/helpers';
 
-const persistedState = loadState() ? loadState().auth : null;
+let persistedState = {};
+if (loadState()) {
+  persistedState = loadState().auth;
+  axios.defaults.headers.common['Authorization'] = `Bearer ${persistedState.token}`;
+}
 
 const INITIAL_STATE = {
   isFetching: false,

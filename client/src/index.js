@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -27,6 +28,7 @@ const store = createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENS
 
 // saves auth state to local storage, prevents having to re-login on page refresh
 store.subscribe(() => {
+  axios.defaults.headers.common['Authorization'] = `Bearer ${store.getState().auth.token}`;
   saveState({
     auth: store.getState().auth
   });

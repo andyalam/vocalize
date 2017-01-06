@@ -127,11 +127,7 @@ export function createClip(blob, clipName, username, token) {
         username
       };
 
-      axios.post(`${API}/posts`, payload, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
+      axios.post(`${API}/posts`, payload)
         .then(response => {
           dispatch(fetchClips(payload.username));
         })
