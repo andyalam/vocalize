@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/index';
 import Post from './post';
+import CircularProgress from 'material-ui/CircularProgress';
+
+import 'style/post_listing';
 
 class PostListing extends Component {
   componentDidMount() {
@@ -11,7 +14,9 @@ class PostListing extends Component {
   renderPosts() {
     if (!this.props.posts.length) {
       return (
-        <div>No posts yet! Stay tuned.</div>
+        <div className="spinner-holder">
+          <CircularProgress size={80} thickness={5} />
+        </div>
       )
     }
 

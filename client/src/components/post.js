@@ -7,21 +7,11 @@ import 'style/post';
 class Post extends Component {
   constructor(props) {
     super();
-    const { user, audio, date, upvotes, downvotes, blobbase64, description } = props;
-    this.state = {
-      user,
-      audio,
-      date,
-      upvotes,
-      downvotes,
-      blobbase64,
-      description
-    }
   }
 
   renderAudio() {
     const contentType = 'audio/ogg';
-    const blob = base64ToBlob(this.state.blobbase64, contentType);
+    const blob = base64ToBlob(this.props.blobbase64, contentType);
     const audioURL = window.URL.createObjectURL(blob);
 
     return (
@@ -30,7 +20,7 @@ class Post extends Component {
   }
 
   render() {
-    const { user, audio, date, upvotes, downvotes, description } = this.state;
+    const { user, audio, date, upvotes, downvotes, description } = this.props;
     return (
       <Card className="post">
         <CardHeader

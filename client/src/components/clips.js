@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import CircularProgress from 'material-ui/CircularProgress';
+
 import Clip from './clip';
 import { fetchClips } from '../actions/index';
 import { decodeJWT } from '../snippets/helpers';
@@ -11,6 +13,15 @@ class Clips extends Component {
   }
 
   render() {
+    if (!this.props.clips.length) {
+      console.log('here');
+      return (
+        <div className="spinner-holder">
+          <CircularProgress size={80} thickness={5} />
+        </div>
+      )
+    }
+
     const clips = this.props.clips.map((clip, index) => {
       return (
         <Clip key={index} {...clip}/>

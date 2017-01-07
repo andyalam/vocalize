@@ -24,9 +24,8 @@ export default function(state = INITIAL_STATE, action) {
       return state.map((clip) => {
         if (clip.id == action.id) {
           return {
-            blob: clip.blob,
-            id: clip.id,
-            clipName: action.newName
+            ...clip,
+            description: action.newName
           }
         }
         return clip;
