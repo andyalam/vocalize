@@ -18,6 +18,7 @@ export default function(state = INITIAL_STATE, action) {
       return state;
 
     case DELETE_CLIP:
+      console.log('action', action.id);
       return state.filter((clip) => clip.id != action.id);
 
     case UPDATE_CLIP_NAME:

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -11,12 +11,19 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import 'style/nav';
 
 class Navigation extends Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
   constructor(props) {
     super(props);
     this.state = {open: false};
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
+
+  goToHome = () => this.context.router.push('/');
 
   render() {
     let links = [
@@ -46,7 +53,8 @@ class Navigation extends Component {
     return (
       <div className="navigation">
         <AppBar
-          title="Vocalize"
+          title={<span className="logo">Vocalize</span>}
+          onTitleTouchTap={this.goToHome}
           iconClassNameRight="muidocs-icon-navigation-expand-more"
           onLeftIconButtonTouchTap={this.handleToggle}
         />

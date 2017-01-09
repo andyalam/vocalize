@@ -71,15 +71,20 @@ module.exports.getClips = function(req, res) {
 module.exports.deleteClip = function(req, res) {
   const { id } = req.params;
 
-  Post
-    .findOne({ _id: id })
-    .exec((err, post) => {
-      if (err) {
-        sendJsonResponse(res, 400, err);
-      }
-
-      console.log(req);
-      console.log(req.payload.name);
-      sendJsonResponse(res, 200, req.user);
-    })
+  if (id) {
+    Post
+      .findByIdAndRemove(id)
+      .exec((err, post) => {
+        if (err) {
+          sendJsonResponse(res, 404, err);
+          return;
+        }
+        // Return ID here for client to handle deletion locally if needed
+        sendJsonResponse(res, 200, { 'id': id });
+      });
+    } else {
+      sendJsonResponse(res, 400, {
+        'message': 'No id provided'
+      });
+    }
 }

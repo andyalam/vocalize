@@ -24,18 +24,13 @@ class Post extends Component {
     return (
       <Card className="post">
         <CardHeader
-          title={user}
-          subtitle={date}
+          title={description}
+          subtitle={`Posted ${date} by ${user}`}
           //avatar="images/jsa-128.jpg"
         />
         <div className="audio-player">
           {this.renderAudio()}
         </div>
-        { description &&
-          <CardText>
-            {description}
-          </CardText>
-        }
       </Card>
     );
   }

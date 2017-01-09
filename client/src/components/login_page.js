@@ -60,7 +60,7 @@ class LoginPage extends Component {
           <h2>Login</h2>
           <CardText>
             <TextField
-              hintText='Username'
+              hintText='Email'
               className='input-field'
               value={this.state.username}
               onChange={this.handleChange.bind(this, 'username')}

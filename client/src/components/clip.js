@@ -27,11 +27,14 @@ class Clip extends Component {
   }
 
   render() {
-    const { clipName, blobbase64, description } = this.props;
+    const { clipName, blobbase64, description, date } = this.props;
     const blob = base64ToBlob(blobbase64);
     const audioURL = window.URL.createObjectURL(blob);
     return (
       <Card className="clip">
+        <CardHeader
+          subtitle={date}
+        />
         <CardText>
           <div onClick={this.clipLabelOnClick}>
             <h6>Description: <small>(tap to update)</small></h6>

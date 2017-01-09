@@ -140,8 +140,8 @@ export function createClip(blob, clipName, username, token) {
 
 
 function deleteClipSuccess(response) {
-  console.log(response);
   const { id } = response.data;
+  console.log('id', id, 'response', response);
 
   return {
     type: DELETE_CLIP,
@@ -160,7 +160,7 @@ export function deleteClip(id) {
         dispatch(deleteClipSuccess(response));
       })
       .catch(response => {
-        deleteClipFailure(response);
+        dispatch(deleteClipFailure(response));
       })
   }
 }

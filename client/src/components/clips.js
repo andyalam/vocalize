@@ -13,15 +13,6 @@ class Clips extends Component {
   }
 
   render() {
-    if (!this.props.clips.length) {
-      console.log('here');
-      return (
-        <div className="spinner-holder">
-          <CircularProgress size={80} thickness={5} />
-        </div>
-      )
-    }
-
     const clips = this.props.clips.map((clip, index) => {
       return (
         <Clip key={index} {...clip}/>
