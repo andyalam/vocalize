@@ -12,6 +12,7 @@ const parsePosts = function(docs) {
 
   docs.map(doc => {
     posts.push({
+      id: doc._id,
       user: doc.user,
       date: doc.date.toUTCString(),
       votes: doc.votes,
@@ -66,3 +67,19 @@ module.exports.getClips = function(req, res) {
       sendJsonResponse(res, 200, parsePosts(posts));
     })
 };
+
+module.exports.deleteClip = function(req, res) {
+  const { id } = req.params;
+
+  Post
+    .findOne({ _id: id })
+    .exec((err, post) => {
+      if (err) {
+        sendJsonResponse(res, 400, err);
+      }
+
+      console.log(req);
+      console.log(req.payload.name);
+      sendJsonResponse(res, 200, req.user);
+    })
+}

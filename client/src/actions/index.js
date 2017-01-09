@@ -139,10 +139,29 @@ export function createClip(blob, clipName, username, token) {
 }
 
 
-export function deleteClip(id) {
+function deleteClipSuccess(response) {
+  console.log(response);
+  const { id } = response.data;
+
   return {
     type: DELETE_CLIP,
     id
+  }
+}
+
+function deleteClipFailure(response) {
+  console.log(response);
+}
+
+export function deleteClip(id) {
+  return dispatch => {
+    axios.delete(`${API}/clips/${id}`)
+      .then(response => {
+        dispatch(deleteClipSuccess(response));
+      })
+      .catch(response => {
+        deleteClipFailure(response);
+      })
   }
 }
 
