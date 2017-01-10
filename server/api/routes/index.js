@@ -19,6 +19,7 @@ router.post('/login', ctrlAuth.login);
 router.get('/posts', ctrlPosts.getPosts);
 router.post('/posts', auth, ctrlPosts.postPost);
 router.get('/:user/clips', ctrlPosts.getClips);
+router.put('/clips/:id', auth, ctrlPosts.updateClip);
 router.delete('/clips/:id', auth, ctrlPosts.deleteClip);
 
 module.exports = router;

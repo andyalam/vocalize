@@ -26,7 +26,7 @@ export default function(state = INITIAL_STATE, action) {
         if (clip.id == action.id) {
           return {
             ...clip,
-            description: action.newName
+            description: action.description
           }
         }
         return clip;

@@ -68,26 +68,26 @@ class RegisterPage extends Component {
           <h2>Register</h2>
           <CardText>
             <TextField
-              hintText='Username'
+              floatingLabelText='Username'
               className='input-field'
               value={this.state.reqUsername}
               onChange={this.handleChange.bind(this, 'reqUsername')}
             />
             <TextField
-              hintText='Email'
+              floatingLabelText='Email'
               className='input-field'
               value={this.state.reqEmail}
               onChange={this.handleChange.bind(this, 'reqEmail')}
             />
             <TextField
-              hintText='Enter Password'
+              floatingLabelText='Enter Password'
               type="password"
               className='input-field'
               value={this.state.reqPassword1}
               onChange={this.handleChange.bind(this, 'reqPassword1')}
             />
             <TextField
-              hintText='Repeat Password'
+              floatingLabelText='Repeat Password'
               type="password"
               className='input-field'
               value={this.state.reqPassword2}

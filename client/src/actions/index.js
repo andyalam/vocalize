@@ -166,11 +166,28 @@ export function deleteClip(id) {
 }
 
 
-export function updateClipName(id, newName) {
+function updateClipNameSuccess(response) {
+  const { description, _id } = response.data;
   return {
     type: UPDATE_CLIP_NAME,
-    id,
-    newName
+    id: _id,
+    description
+  }
+}
+
+function updateClipNameFailure(response) {
+  console.error('failure response', response);
+}
+
+export function updateClipName(id, clipName) {
+  return dispatch => {
+    axios.put(`${API}/clips/${id}`, { clipName })
+      .then(response => {
+        dispatch(updateClipNameSuccess(response));
+      })
+      .catch(response => {
+        dispatch(updateClipNameFailure(response));
+      })
   }
 }
 

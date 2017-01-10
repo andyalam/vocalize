@@ -41,8 +41,8 @@ module.exports.postPost = function(req, res) {
   console.log('clipname', clipName);
 
   if (!blob || !username) {
-      sendJsonResponse(res, 400, { message: 'No file found.'});
-      return;
+    sendJsonResponse(res, 400, { message: 'No file found.'});
+    return;
   }
 
   const post = new Post({
@@ -68,6 +68,38 @@ module.exports.getClips = function(req, res) {
     })
 };
 
+module.exports.updateClip = function(req, res) {
+  const { id } = req.params;
+  const { clipName } = req.body;
+  console.log('clipName', clipName);
+
+  if (id) {
+    Post
+      .findById(id)
+      .exec((err, post) => {
+
+        if (!post) {
+          sendJsonResponse(res, 404, {
+            'message': 'Post not found'
+          });
+          return;
+        } else if (err) {
+          sendJsonResponse(res, 400, err);
+          return;
+        }
+
+        post.description = clipName;
+        post.save((err, post) => {
+          err ? sendJsonResponse(res, 404, err) : sendJsonResponse(res, 200, post);
+        });
+      });
+  } else {
+    sendJsonResponse(res, 400, {
+      'message': 'No id provided'
+    });
+  }
+}
+
 module.exports.deleteClip = function(req, res) {
   const { id } = req.params;
 
@@ -82,9 +114,9 @@ module.exports.deleteClip = function(req, res) {
         // Return ID here for client to handle deletion locally if needed
         sendJsonResponse(res, 200, { 'id': id });
       });
-    } else {
-      sendJsonResponse(res, 400, {
-        'message': 'No id provided'
-      });
-    }
+  } else {
+    sendJsonResponse(res, 400, {
+      'message': 'No id provided'
+    });
+  }
 }
