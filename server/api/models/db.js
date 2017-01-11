@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-const dbURI = 'mongodb://localhost/vocalize';
+let dbURI = 'mongodb://localhost/vocalize';
+if (process.env.NODE_ENV == 'production') {
+  dbURI = process.env.MONGOLAB_URI;
+  console.log('using production db');
+}
 
 mongoose.connect(dbURI);
 
