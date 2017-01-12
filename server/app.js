@@ -44,6 +44,9 @@ app.use(function(req, res, next) {
 });
 
 app.use('/api', api_routes);
+app.use(function(req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'client', 'index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
