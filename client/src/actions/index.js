@@ -24,7 +24,7 @@ export const FETCH_CLIPS = 'FETCH_CLIPS';
 export const CLIP_UPLOAD_FAILED = 'CLIP_UPLOAD_FAILED';
 
 let API = 'http://localhost:3000/api';
-if (1) {
+if (window.location.hostname === 'vocalize.herokuapp.com') {
   API = 'https://vocalize.herokuapp.com/api';
 }
 
