@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/api', api_routes);
-app.use(function(req, res) {
+app.use('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'public', 'client', 'index.html'));
 });
 
