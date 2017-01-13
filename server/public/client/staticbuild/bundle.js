@@ -38205,8 +38205,8 @@
 	var CLIP_UPLOAD_FAILED = exports.CLIP_UPLOAD_FAILED = 'CLIP_UPLOAD_FAILED';
 
 	var API = 'http://localhost:3000/api';
-	if (window.location.hostname === 'vocalize.herokuapp.com') {
-	  API = window.location.hostname;
+	if (1) {
+	  API = 'https://vocalize.herokuapp.com/api';
 	}
 
 	function requestLogin(creds) {
