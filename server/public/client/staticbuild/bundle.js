@@ -714,7 +714,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -843,7 +843,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 	'use strict';
 
@@ -1287,7 +1287,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -1396,7 +1396,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	function makeEmptyFunction(arg) {
@@ -1437,7 +1437,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -1468,7 +1468,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -1673,7 +1673,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -1718,7 +1718,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -2798,7 +2798,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -3235,7 +3235,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -3666,7 +3666,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -4505,7 +4505,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 	'use strict';
 
@@ -5764,7 +5764,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -6255,7 +6255,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -6337,7 +6337,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -6400,7 +6400,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -6574,7 +6574,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -7675,7 +7675,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -7799,7 +7799,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -7998,7 +7998,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -8091,7 +8091,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -8190,7 +8190,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -8219,7 +8219,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -8585,7 +8585,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -8627,7 +8627,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -8730,7 +8730,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -9063,7 +9063,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -12497,7 +12497,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 * @typechecks static-only
 	 */
 
@@ -13690,7 +13690,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -14658,7 +14658,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -15950,7 +15950,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -16087,7 +16087,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -16118,7 +16118,7 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
 	 * @typechecks
-	 *
+	 * 
 	 */
 
 	/*eslint-disable no-self-compare */
@@ -16350,7 +16350,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -16375,7 +16375,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -16619,7 +16619,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -16643,7 +16643,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -16688,7 +16688,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -16864,7 +16864,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -19008,7 +19008,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	var isTextNode = __webpack_require__(151);
@@ -19646,7 +19646,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -21100,7 +21100,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -23289,7 +23289,7 @@
 	$export.B = 16;  // bind
 	$export.W = 32;  // wrap
 	$export.U = 64;  // safe
-	$export.R = 128; // real proto method for `library`
+	$export.R = 128; // real proto method for `library` 
 	module.exports = $export;
 
 /***/ },
@@ -24500,7 +24500,7 @@
 /* 280 */
 /***/ function(module, exports) {
 
-
+	
 
 /***/ },
 /* 281 */
@@ -38205,6 +38205,9 @@
 	var CLIP_UPLOAD_FAILED = exports.CLIP_UPLOAD_FAILED = 'CLIP_UPLOAD_FAILED';
 
 	var API = 'http://localhost:3000/api';
+	if (window.location.hostname === 'vocalize.herokuapp.com') {
+	  API = window.location.hostname;
+	}
 
 	function requestLogin(creds) {
 	  return {
@@ -41595,7 +41598,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
@@ -42862,7 +42865,7 @@
 	 * LICENSE file in the root directory of this source tree. An additional grant
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 *
-	 *
+	 * 
 	 */
 
 	'use strict';
