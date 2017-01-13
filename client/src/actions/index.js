@@ -23,7 +23,10 @@ export const UPDATE_CLIP_NAME = 'UPDATE_CLIP_NAME';
 export const FETCH_CLIPS = 'FETCH_CLIPS';
 export const CLIP_UPLOAD_FAILED = 'CLIP_UPLOAD_FAILED';
 
-const API = 'http://localhost:3000/api';
+let API = 'http://localhost:3000/api';
+if (window.location.hostname === 'vocalize.herokuapp.com') {
+  API = window.location.hostname;
+}
 
 
 function requestLogin(creds) {
