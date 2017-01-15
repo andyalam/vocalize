@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createClip } from '../actions/index';
 import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 import { decodeJWT } from '../snippets/helpers';
 
 import 'style/recorder';
@@ -26,15 +28,9 @@ class Recorder extends Component {
       audioCtx: audioCtx,
       analyser: analyser,
       chunks: [],
-      recording: false
-    }
-
-    this.draw = this.draw.bind(this);
-    this.visualize = this.visualize.bind(this);
-    this.recordOnClick = this.recordOnClick.bind(this);
-    this.stopOnClick = this.stopOnClick.bind(this);
-    this.mediaRecorderOnStop = this.mediaRecorderOnStop.bind(this);
-    this.mediaRecorderOnDataAvailable = this.mediaRecorderOnDataAvailable.bind(this);
+      recording: false,
+      recorderError: ''
+    };
   }
 
   componentWillMount() {
@@ -50,7 +46,7 @@ class Recorder extends Component {
     this.state.audioCtx.close();
   }
 
-  draw() {
+  draw = () => {
     var canvasCtx = this.state.canvas.getContext("2d");
     var dataArray = new Uint8Array(this.state.analyser.frequencyBinCount);
     var bufferLength = this.state.analyser.frequencyBinCount;
@@ -92,7 +88,7 @@ class Recorder extends Component {
 
   }
 
-  visualize(stream) {
+  visualize = (stream) => {
     var source = this.state.audioCtx.createMediaStreamSource(stream);
     this.state.analyser.fftSize = 2048;
     var bufferLength = this.state.analyser.frequencyBinCount;
@@ -124,6 +120,10 @@ class Recorder extends Component {
 
       var onError = function(err) {
         console.log('The following error occured: ' + err);
+        this.setState({
+          recorderError: `Error: This is most likely caused by microphone permissions.
+                          Ensure your browser has access to the device's mic.`
+        });
       }
 
       navigator.getUserMedia(constraints, onSuccess.bind(this), onError);
@@ -132,7 +132,7 @@ class Recorder extends Component {
     }
   }
 
-  recordOnClick() {
+  recordOnClick = () => {
     this.state.mediaRecorder.start();
     console.log(this.state.mediaRecorder.state);
     console.log("recorder started");
@@ -140,7 +140,7 @@ class Recorder extends Component {
     this.setState({ recording: true });
   }
 
-  stopOnClick() {
+  stopOnClick = () => {
     this.state.mediaRecorder.stop();
     console.log(this.state.mediaRecorder.state);
     console.log("recorder stopped");
@@ -150,7 +150,7 @@ class Recorder extends Component {
     this.setState({ recording: false });
   }
 
-  mediaRecorderOnStop() {
+  mediaRecorderOnStop = () => {
     console.log("data available after MediaRecorder.stop() called.");
 
     var clipName = prompt('Enter a name/description for your sound clip?','My unnamed clip');
@@ -168,15 +168,36 @@ class Recorder extends Component {
     console.log("recorder stopped");
   }
 
-  mediaRecorderOnDataAvailable(e) {
+  mediaRecorderOnDataAvailable = (e) => {
     this.setState({
       chunks: [...this.state.chunks, e.data]
     })
   }
 
+  closeDialog = () => {
+    this.setState({
+      recorderError: ''
+    });
+  }
+
   render() {
     return (
       <section className="main-controls">
+        <Dialog
+          title="Recording Error"
+          actions={
+            <FlatButton
+              label="Cancel"
+              primary={true}
+              onTouchTap={this.closeDialog}
+            />
+          }
+          modal={false}
+          open={Boolean(this.state.recorderError)}
+          onRequestClose={this.closeDialog}
+        >
+          {this.state.recorderError}
+        </Dialog>
         <canvas ref="canvas" className="visualizer"></canvas>
         <div id="buttons">
           <RaisedButton
