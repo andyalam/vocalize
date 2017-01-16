@@ -6,7 +6,6 @@ import Chip from 'material-ui/Chip';
 import CommunicationCallMade from 'material-ui/svg-icons/communication/call-made';
 import CommunicationCallReceived from 'material-ui/svg-icons/communication/call-received';
 
-
 import 'style/post';
 
 class Post extends Component {
