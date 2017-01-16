@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteClip, updateClipName } from '../actions/index';
+import { base64ToBlob } from '../snippets/helpers';
+
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
-import { base64ToBlob } from '../snippets/helpers';
+import Chip from 'material-ui/Chip';
 
 import 'style/clip';
 
 class Clip extends Component {
-  constructor() {
-    super();
-    this.deleteButtonOnClick = this.deleteButtonOnClick.bind(this);
-    this.clipLabelOnClick = this.clipLabelOnClick.bind(this);
+  constructor(props) {
+    super(props);
   }
 
-  deleteButtonOnClick() {
+  deleteButtonOnClick = () => {
     this.props.deleteClip(this.props.id);
   }
 
-  clipLabelOnClick() {
+  clipLabelOnClick = () => {
     const { clipName, id } = this.props;
     const newClipName = prompt('Enter a new description for your sound clip?');
     if(newClipName !== null && newClipName !== clipName) {
@@ -27,7 +27,7 @@ class Clip extends Component {
   }
 
   render() {
-    const { clipName, blobbase64, description, date } = this.props;
+    const { clipName, blobbase64, description, date, votes } = this.props;
     const blob = base64ToBlob(blobbase64);
     const audioURL = window.URL.createObjectURL(blob);
     return (
@@ -35,6 +35,7 @@ class Clip extends Component {
         <CardHeader
           subtitle={date}
         />
+        <Chip className="chip">{votes.length}</Chip>
         <CardText>
           <div onClick={this.clipLabelOnClick}>
             <h6>Description: <small>(tap to update)</small></h6>

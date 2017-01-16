@@ -2,39 +2,25 @@
   position: relative
   border: 1px solid #ccc
   margin: 15px 0
+  overflow: auto
+  &__left, &__right
+    float: left
+  &__left
+    width: 10%
+    text-align: center
+  &__right
+    width: 90%
+  .upvote, .downvote
+    &:hover
+      cursor: pointer
+  .upvote
+    &.active
+      color: #FF8B60 !important
+  .downvote
+    &.active
+      color: #9494FF !important
+  .chip
+    margin: 0 auto !important
   audio
     width: 100%
     max-width: 100%
-  .info
-    //border-right: 1px solid #ccc
-  &__user, &__date
-    word-wrap: break-word
-  &__upvotes
-    position: absolute
-    top: 0
-    right: 0
-    height: 100%
-    width: 30px
-    background: #ccc
-    .up, .down
-      display: flex
-      justify-content: center
-      align-items: center
-      height: 50%
-      background: #fff
-      border-left: 1px solid #ccc
-      &:not(:first-of-type)
-        border-top: 1px solid #ccc
-      &:hover
-        cursor: pointer
-        background: #ccc
-    .up
-      .fa
-        color: #89C149
-      &:hover .fa
-        color: #89C149 * 0.7
-    .down
-      .fa
-        color: #E06D6D
-      &:hover .fa
-        color: #E06D6D
