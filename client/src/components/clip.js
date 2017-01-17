@@ -35,7 +35,7 @@ class Clip extends Component {
         <CardHeader
           subtitle={date}
         />
-        <Chip className="chip">{votes.length}</Chip>
+        <Chip className="chip">{votes}</Chip>
         <CardText>
           <div onClick={this.clipLabelOnClick}>
             <h6>Description: <small>(tap to update)</small></h6>

@@ -11,11 +11,13 @@ const parsePosts = function(docs) {
   const posts = [];
 
   docs.map(doc => {
+    const voteAmount = doc.votes.reduce((a, b) => { return a + b.positive * 1 }, 0);
+
     posts.push({
       id: doc._id,
       user: doc.user,
       date: doc.date.toUTCString(),
-      votes: doc.votes,
+      votes: voteAmount,
       description: doc.description,
       blobbase64: doc.blobbase64
     });
@@ -35,10 +37,8 @@ module.exports.getPosts = function(req, res) {
     })
 }
 
-module.exports.postPost = function(req, res) {
+module.exports.postClip = function(req, res) {
   const { blob, username, clipName } = req.body;
-
-  console.log('clipname', clipName);
 
   if (!blob || !username) {
     sendJsonResponse(res, 400, { message: 'No file found.'});
@@ -51,7 +51,11 @@ module.exports.postPost = function(req, res) {
     description: clipName
   });
 
-  post.save((error) => {
+  post.save((err) => {
+    if (err) {
+      sendJsonResponse(res, 400, err);
+      return;
+    }
     sendJsonResponse(res, 200, {'message': 'file created'});
   });
 };
@@ -71,7 +75,6 @@ module.exports.getClips = function(req, res) {
 module.exports.updateClip = function(req, res) {
   const { id } = req.params;
   const { clipName } = req.body;
-  console.log('clipName', clipName);
 
   if (id) {
     Post
@@ -117,6 +120,67 @@ module.exports.deleteClip = function(req, res) {
   } else {
     sendJsonResponse(res, 400, {
       'message': 'No id provided'
+    });
+  }
+}
+
+function doAddVote(req, res, post, user, voteValue) {
+  if (!post) {
+    sendJsonResponse(res, 404, {
+      'message': 'id not found'
+    });
+    return;
+  }
+
+  // find if a pre-existing vote by the user exists that has the
+  // SAME value if so, return
+  for (var i = 0; i < post.votes.length; i++) {
+    const vote = post.votes[i];
+    if (vote.user === user && vote.positive == voteValue) {
+      sendJsonResponse(res, 200, {'message': 'vote is the same', voteValue});
+      return;
+    }
+  }
+
+  // if the user hasn't voted yet, apply the vote
+  post.votes.push({
+    positive: voteValue,
+    user
+  });
+
+  // save and send the response to the client
+  post.save(
+    (err, post) => {
+      if (err) {
+        sendJsonResponse(res, 400, err);
+        return;
+      }
+      vote = post.votes[post.votes.length - 1];
+      sendJsonResponse(res, 201, vote);
+    }
+  )
+}
+
+module.exports.vote = function(req, res) {
+  const { id } = req.params;
+  const { user, voteValue } = req.body;
+
+  if (id && user && voteValue) {
+    Post
+      .findById(id)
+      .select('votes')
+      .exec(
+        (err, post) => {
+          if (err) {
+            sendJsonResponse(res, 400, err);
+            return;
+          }
+          doAddVote(req, res, post, user, voteValue);
+        }
+      )
+  } else {
+    sendJsonResponse(res, 400, {
+      'message': 'Invalid params or post body'
     });
   }
 }

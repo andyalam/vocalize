@@ -40,7 +40,7 @@ class Post extends Component {
             className="upvote active"
             onClick={this.upvoteOnClick}
           />
-          <Chip className="chip">{votes.length}</Chip>
+          <Chip className="chip">{votes}</Chip>
           <CommunicationCallReceived
             className="downvote active"
             onClick={this.downvoteOnClick}
