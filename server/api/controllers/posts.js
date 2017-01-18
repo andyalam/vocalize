@@ -11,7 +11,11 @@ const parsePosts = function(docs) {
   const posts = [];
 
   docs.map(doc => {
-    const voteAmount = doc.votes.reduce((a, b) => { return a + b.positive * 1 }, 0);
+    const voteAmount = doc.votes.reduce((a, b) => {
+      const value = b.positive ? 1 : -1;
+      console.log(value);
+      return a + value;
+    }, 0);
 
     posts.push({
       id: doc._id,
@@ -136,7 +140,7 @@ function doAddVote(req, res, post, user, voteValue) {
   // SAME value if so, return
   for (var i = 0; i < post.votes.length; i++) {
     const vote = post.votes[i];
-    if (vote.user === user && vote.positive == voteValue) {
+    if (vote.user === user && vote.positive.toString() === voteValue.toString()) {
       sendJsonResponse(res, 200, {'message': 'vote is the same', voteValue});
       return;
     }
