@@ -13,7 +13,6 @@ const parsePosts = function(docs) {
   docs.map(doc => {
     const voteAmount = doc.votes.reduce((a, b) => {
       const value = b.positive ? 1 : -1;
-      console.log(value);
       return a + value;
     }, 0);
 
@@ -136,21 +135,25 @@ function doAddVote(req, res, post, user, voteValue) {
     return;
   }
 
-  // find if a pre-existing vote by the user exists that has the
-  // SAME value if so, return
+
+  let voteAlreadyExists = false;
+  // find out if a pre-existing vote by the user exists
   for (var i = 0; i < post.votes.length; i++) {
     const vote = post.votes[i];
-    if (vote.user === user && vote.positive.toString() === voteValue.toString()) {
-      sendJsonResponse(res, 200, {'message': 'vote is the same', voteValue});
-      return;
+    if (vote.user === user) {
+      // update the pre-existing vote;
+      voteAlreadyExists = true;
+      vote.positive = voteValue;
     }
   }
 
-  // if the user hasn't voted yet, apply the vote
-  post.votes.push({
-    positive: voteValue,
-    user
-  });
+  if (!voteAlreadyExists) {
+    // if the user hasn't voted yet, apply the vote
+    post.votes.push({
+      positive: voteValue,
+      user
+    });
+  }
 
   // save and send the response to the client
   post.save(
@@ -163,6 +166,7 @@ function doAddVote(req, res, post, user, voteValue) {
       sendJsonResponse(res, 201, vote);
     }
   )
+
 }
 
 module.exports.vote = function(req, res) {
