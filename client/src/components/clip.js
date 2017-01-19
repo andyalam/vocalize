@@ -18,7 +18,7 @@ class Clip extends Component {
     this.props.deleteClip(this.props.id);
   }
 
-  clipLabelOnClick = () => {
+  editButtonOnClick = () => {
     const { clipName, id } = this.props;
     const newClipName = prompt('Enter a new description for your sound clip?');
     if(newClipName !== null && newClipName !== clipName) {
@@ -38,11 +38,17 @@ class Clip extends Component {
         <Chip className="chip">{votes}</Chip>
         <CardText>
           <div onClick={this.clipLabelOnClick}>
-            <h6>Description: <small>(tap to update)</small></h6>
+            <h6>Description:</h6>
             <p>{description ? description: ""}</p>
           </div>
           <audio controls src={audioURL} />
           <div className="button-wrapper">
+            <RaisedButton
+              label="Edit description"
+              primary={true}
+              className="edit"
+              onClick={this.editButtonOnClick}
+            />
             <RaisedButton
               label="Delete"
               secondary={true}
