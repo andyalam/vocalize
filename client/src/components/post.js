@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { voteOnClip } from '../actions/index';
 import { base64ToBlob } from '../snippets/helpers';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
@@ -24,11 +26,13 @@ class Post extends Component {
   }
 
   upvoteOnClick = (e) => {
-    console.log('upvotes');
+    const { voteOnClip, id } = this.props;
+    voteOnClip(id, true);
   }
 
   downvoteOnClick = (e) => {
-    console.log('downvote');
+    const { voteOnClip, id } = this.props;
+    voteOnClip(id, false);
   }
 
   render() {
@@ -61,4 +65,4 @@ class Post extends Component {
   }
 }
 
-export default Post;
+export default connect(null, { voteOnClip })(Post);

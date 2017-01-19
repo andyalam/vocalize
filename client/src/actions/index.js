@@ -22,20 +22,14 @@ export const DELETE_CLIP = 'DELETE_CLIP';
 export const UPDATE_CLIP_NAME = 'UPDATE_CLIP_NAME';
 export const FETCH_CLIPS = 'FETCH_CLIPS';
 export const CLIP_UPLOAD_FAILED = 'CLIP_UPLOAD_FAILED';
+export const VOTE_SUCCESS = 'VOTE_SUCCESS';
+export const VOTE_FAILURE = 'VOTE_FAILURE';
 
+
+// API config
 let API = 'http://localhost:3000/api';
 if (window.location.hostname === 'vocalize.herokuapp.com') {
   API = 'https://vocalize.herokuapp.com/api';
-}
-
-
-function requestLogin(creds) {
-  return {
-    type: LOGIN_REQUEST,
-    isFetching: true,
-    isAuthenticated: false,
-    creds
-  }
 }
 
 
@@ -47,7 +41,6 @@ function receiveLogin(req) {
     id_token: req.data.token
   }
 }
-
 
 function loginError(message) {
   return {
@@ -97,6 +90,7 @@ export function registerUser(creds) {
   }
 }
 
+
 export function logout() {
   return {
     type: LOGOUT
@@ -119,7 +113,6 @@ function createClipFail(response) {
     type: CLIP_UPLOAD_FAILED
   };
 }
-
 
 export function createClip(blob, clipName, username, token) {
   return dispatch => {
@@ -201,5 +194,35 @@ export function fetchClips(username) {
   return {
     type: FETCH_CLIPS,
     payload: clips
+  };
+}
+
+
+function voteFailure(response) {
+  console.log(response);
+  return {
+    type: VOTE_FAILURE
+  }
+}
+
+function voteSuccess(response) {
+  return {
+    type: VOTE_SUCCESS
+  }
+}
+
+export function voteOnClip(clipId, voteValue) {
+  const data = {
+    voteValue
+  };
+
+  return dispatch => {
+    axios.post(`${API}/clips/${clipId}/vote`, data)
+      .then(response => {
+        dispatch(voteSuccess(response));
+      })
+      .catch(response => {
+        dispatch(voteFailure(response));
+      });
   };
 }

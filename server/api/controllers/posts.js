@@ -171,9 +171,10 @@ function doAddVote(req, res, post, user, voteValue) {
 
 module.exports.vote = function(req, res) {
   const { id } = req.params;
-  const { user, voteValue } = req.body;
+  const { voteValue } = req.body;
+  const user = req.payload.name;
 
-  if (id && user && voteValue) {
+  if (id && user && voteValue.toString() !== '') {
     Post
       .findById(id)
       .select('votes')
