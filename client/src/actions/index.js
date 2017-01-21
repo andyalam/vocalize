@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { guid, blobToBase64 } from '../snippets/helpers';
+import { guid, blobToBase64, decodeJWT } from '../snippets/helpers';
 
 // auth
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -34,11 +34,15 @@ if (window.location.hostname === 'vocalize.herokuapp.com') {
 
 
 function receiveLogin(req) {
+  const { username, email } = decodeJWT(req.data.token);
+
   return {
     type: LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    id_token: req.data.token
+    id_token: req.data.token,
+    username,
+    email
   }
 }
 
@@ -65,9 +69,13 @@ export function loginUser(creds) {
 
 
 function receiveRegister(req) {
+  const { username, email } = decodeJWT(req.data.token);
+
   return {
     type: REGISTER_SUCCESS,
-    id_token: req.data.token
+    id_token: req.data.token,
+    username,
+    email
   }
 }
 
@@ -98,8 +106,8 @@ export function logout() {
 }
 
 
-export function fetchPosts() {
-  const posts = axios.get(`${API}/posts`);
+export function fetchPosts(user = '') {
+  const posts = axios.get(`${API}/posts/${user}`);
 
   return {
     type: FETCH_POSTS,
@@ -207,7 +215,8 @@ function voteFailure(response) {
 
 function voteSuccess(response) {
   return {
-    type: VOTE_SUCCESS
+    type: VOTE_SUCCESS,
+    vote: response.data
   }
 }
 

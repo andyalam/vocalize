@@ -15,8 +15,12 @@ const ctrlAuth =require('../controllers/authentication');
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 
-
+// Get all posts
 router.get('/posts', ctrlPosts.getPosts);
+
+// Get all posts with a specific user vote history
+router.get('/posts/:user', ctrlPosts.getPosts);
+
 router.post('/posts', auth, ctrlPosts.postClip);
 router.get('/:user/clips', ctrlPosts.getClips);
 router.put('/clips/:id', auth, ctrlPosts.updateClip);

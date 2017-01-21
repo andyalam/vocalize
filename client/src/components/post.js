@@ -36,17 +36,27 @@ class Post extends Component {
   }
 
   render() {
-    const { user, audio, date, upvotes, downvotes, description, votes } = this.props;
+    const { user, audio, date, upvotes, downvotes, description, votes, voteHistory } = this.props;
+    let upvoted = 0;
+    let downvoted = 0;
+    if (voteHistory) {
+      if (voteHistory.positive.toString() === 'true') {
+        upvoted = 1;
+      } else if (voteHistory.positive.toString() === 'false') {
+        downvoted = 1;
+      }
+    }
+
     return (
       <Card className="post">
         <div className="post__left">
           <CommunicationCallMade
-            className="upvote active"
+            className={`upvote active ${upvoted ? 'upvoted' : ''}`}
             onClick={this.upvoteOnClick}
           />
           <Chip className="chip">{votes}</Chip>
           <CommunicationCallReceived
-            className="downvote active"
+            className={`downvote active ${downvoted ? 'downvoted' : ''}`}
             onClick={this.downvoteOnClick}
           />
         </div>

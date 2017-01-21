@@ -8,7 +8,8 @@ import 'style/post_listing';
 
 class PostListing extends Component {
   componentDidMount() {
-    this.props.fetchPosts();
+    const { isAuthenticated, username } = this.props.auth;
+    this.props.fetchPosts(username);
   }
 
   renderPosts() {
@@ -37,7 +38,7 @@ class PostListing extends Component {
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts.all };
+  return { auth: state.auth, posts: state.posts.all };
 }
 
 export default connect(mapStateToProps, { fetchPosts } )(PostListing);

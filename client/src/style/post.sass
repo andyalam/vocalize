@@ -2,6 +2,7 @@
   position: relative
   border: 1px solid #ccc
   margin: 15px 0
+  padding-top: 15px
   overflow: auto
   &__left, &__right
     float: left
@@ -14,11 +15,15 @@
     &:hover
       cursor: pointer
   .upvote
-    &.active
-      color: #FF8B60 !important
+    color: #FF8B60 !important
+    &.upvoted
+      border-radius: 100%
+      box-shadow: 0 0 10px #ccc
   .downvote
-    &.active
-      color: #9494FF !important
+    color: #9494FF !important
+    &.downvoted
+      border-radius: 100%
+      box-shadow: 0 0 10px #ccc
   .chip
     margin: 0 auto !important
   audio

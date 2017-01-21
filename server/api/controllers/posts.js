@@ -7,7 +7,7 @@ const sendJsonResponse = function(res, status, content) {
   res.status(status).json(content);
 }
 
-const parsePosts = function(docs) {
+const parsePosts = function(docs, user) {
   const posts = [];
 
   docs.map(doc => {
@@ -16,13 +16,24 @@ const parsePosts = function(docs) {
       return a + value;
     }, 0);
 
+    // vote history if user has voted on this post before
+    let voteHistory;
+    if (user) {
+      doc.votes.map(vote => {
+        if (vote.user === user) {
+          voteHistory = vote;
+        }
+      })
+    }
+
     posts.push({
       id: doc._id,
       user: doc.user,
       date: doc.date.toUTCString(),
       votes: voteAmount,
       description: doc.description,
-      blobbase64: doc.blobbase64
+      blobbase64: doc.blobbase64,
+      voteHistory
     });
   });
 
@@ -30,13 +41,19 @@ const parsePosts = function(docs) {
 }
 
 module.exports.getPosts = function(req, res) {
+  // in this controller
+  // check if user was passed into params, if so make sure vote history
+  // is returned from post parser
+
+  const { user } = req.params;
+
   Post
     .find({})
     .limit(30)
     .sort({ date: -1 })
     .exec((err, posts) => {
       if (err) sendJsonResponse(res, 400, err);
-      sendJsonResponse(res, 200, parsePosts(posts));
+      sendJsonResponse(res, 200, parsePosts(posts, user));
     })
 }
 
@@ -163,7 +180,12 @@ function doAddVote(req, res, post, user, voteValue) {
         return;
       }
       vote = post.votes[post.votes.length - 1];
-      sendJsonResponse(res, 201, vote);
+      arrangedVote = {
+        positive: vote.positive,
+        user: vote.user,
+        postID: post.id
+      };
+      sendJsonResponse(res, 201, arrangedVote);
     }
   )
 

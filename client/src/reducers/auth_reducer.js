@@ -37,7 +37,9 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         token: action.id_token,
         isAuthenticated: action.isAuthenticated,
-        errorMessage: ''
+        errorMessage: '',
+        username: action.username,
+        email: action.email
       }
 
     case LOGIN_FAILURE:
@@ -52,7 +54,9 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         isFetching: false,
         isAuthenticated: true,
-        token: action.id_token
+        token: action.id_token,
+        username: action.username,
+        email: action.email
       }
 
     case REGISTER_FAILURE:
