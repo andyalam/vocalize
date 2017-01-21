@@ -12,19 +12,18 @@ export default function(state = INITIAL_STATE, action) {
 
     case VOTE_SUCCESS:
       const { positive, postID } = action.vote;
-
       const posts = state.all.map(post => {
         if (post.id === postID) {
-          const currentVote = positive * 1 ? 1 : -1;
-          let previousVote = 0;
+          const currentVote = (positive * 1) ? 1 : -1;
 
+          let previousVote = 0;
           if (post.voteHistory) {
             previousVote = post.voteHistory.positive * 1 ? 1 : -1;
-            // if the vote is the same value, return the post object unmodified
-            if (previousVote === currentVote){
-              return post;
-            }
           }
+
+          /*console.log('post.votes', post.votes);
+          console.log('currentVote', currentVote);
+          console.log('previousVote', previousVote);*/
           const newTotalVotes = post.votes + currentVote - previousVote;
 
           return {

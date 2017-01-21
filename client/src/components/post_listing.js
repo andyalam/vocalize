@@ -8,7 +8,7 @@ import 'style/post_listing';
 
 class PostListing extends Component {
   componentDidMount() {
-    const { isAuthenticated, username } = this.props.auth;
+    const { username } = this.props.auth;
     this.props.fetchPosts(username);
   }
 

@@ -17,7 +17,11 @@ const parsePosts = function(docs, user) {
     }, 0);
 
     // vote history if user has voted on this post before
-    let voteHistory;
+    let voteHistory = {
+      user: '',
+      positive: '',
+      _id: ''
+    };
     if (user) {
       doc.votes.map(vote => {
         if (vote.user === user) {
@@ -154,6 +158,7 @@ function doAddVote(req, res, post, user, voteValue) {
 
 
   let voteAlreadyExists = false;
+  let preexistingVoteIndex;
   // find out if a pre-existing vote by the user exists
   for (var i = 0; i < post.votes.length; i++) {
     const vote = post.votes[i];
@@ -161,6 +166,7 @@ function doAddVote(req, res, post, user, voteValue) {
       // update the pre-existing vote;
       voteAlreadyExists = true;
       vote.positive = voteValue;
+      preexistingVoteIndex = i;
     }
   }
 
@@ -179,12 +185,13 @@ function doAddVote(req, res, post, user, voteValue) {
         sendJsonResponse(res, 400, err);
         return;
       }
-      vote = post.votes[post.votes.length - 1];
+      let vote = post.votes[preexistingVoteIndex ? preexistingVoteIndex : post.votes.length-1]
       arrangedVote = {
         positive: vote.positive,
         user: vote.user,
         postID: post.id
       };
+      console.log('a user', arrangedVote.user);
       sendJsonResponse(res, 201, arrangedVote);
     }
   )
