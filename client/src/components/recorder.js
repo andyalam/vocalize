@@ -156,7 +156,8 @@ class Recorder extends Component {
     var clipName = prompt('Enter a name/description for your sound clip?','My unnamed clip');
 
     const blob = new Blob(this.state.chunks, { 'type' : 'audio/ogg; codecs=opus' });
-    const { username } = decodeJWT(this.props.auth.token);
+    console.log(blob);
+    const { username } = this.props.auth;
 
     this.props.createClip(blob, clipName, username, this.props.auth.token);
 

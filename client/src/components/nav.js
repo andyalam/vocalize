@@ -27,7 +27,8 @@ class Navigation extends Component {
 
   render() {
     let links = [
-      { text: 'Explore', url: '/'}
+      { text: 'Explore', url: '/'},
+      { text: 'Categories', url: '/categories' }
     ];
 
     if (!this.props.auth.isAuthenticated) {
