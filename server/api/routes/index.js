@@ -20,8 +20,10 @@ router.get('/posts', ctrlPosts.getPosts);
 
 // Get all posts with a specific user vote history
 router.get('/posts/:user', ctrlPosts.getPosts);
-
 router.post('/posts', auth, ctrlPosts.postClip);
+router.get('/categories', ctrlPosts.getCategories);
+router.get('/categories/:category', ctrlPosts.getCategoryPosts);
+
 router.get('/:user/clips', ctrlPosts.getClips);
 router.put('/clips/:id', auth, ctrlPosts.updateClip);
 router.delete('/clips/:id', auth, ctrlPosts.deleteClip);

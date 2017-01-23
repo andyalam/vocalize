@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const crate = require('mongoose-crate');
 const LocalFS = require('mongoose-crate-localfs');
 
+const categorySchema = new mongoose.Schema({
+  category: { type: String, required: true, unique: true },
+  title: { type: String, required: true, unique: true }
+});
+
 const voteSchema = new mongoose.Schema({
   user: { type: String, required: true },
   positive: { type: Boolean, required: true }
@@ -24,5 +29,5 @@ postSchema.plugin(crate, {
   }
 });
 
-
+mongoose.model('Category', categorySchema);
 mongoose.model('Post', postSchema);

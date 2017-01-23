@@ -1,6 +1,7 @@
 import {
   FETCH_POSTS,
-  VOTE_SUCCESS
+  VOTE_SUCCESS,
+  FETCH_CATEGORIES
 } from '../actions/index';
 
 const INITIAL_STATE = { all: [] };
@@ -39,6 +40,9 @@ export default function(state = INITIAL_STATE, action) {
       });
 
       return { ...state, all: posts };
+
+    case FETCH_CATEGORIES:
+      return { ...state, categories: action.payload.data }
 
     default:
       return state;

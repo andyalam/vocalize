@@ -2,10 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 const Post = mongoose.model('Post');
+const Category = mongoose.model('Category');
+
 
 const sendJsonResponse = function(res, status, content) {
   res.status(status).json(content);
 }
+
 
 const parsePosts = function(docs, user) {
   const posts = [];
@@ -44,6 +47,7 @@ const parsePosts = function(docs, user) {
   return posts;
 }
 
+
 module.exports.getPosts = function(req, res) {
   // in this controller
   // check if user was passed into params, if so make sure vote history
@@ -60,6 +64,7 @@ module.exports.getPosts = function(req, res) {
       sendJsonResponse(res, 200, parsePosts(posts, user));
     })
 }
+
 
 module.exports.postClip = function(req, res) {
   const { blob, username, clipName } = req.body;
@@ -84,6 +89,22 @@ module.exports.postClip = function(req, res) {
   });
 };
 
+
+module.exports.getCategories = function(req, res) {
+  Category
+    .find({})
+    .exec((err, categories) => {
+      if (err) sendJsonResponse(res, 400, err);
+      sendJsonResponse(res, 200, categories);
+    });
+};
+
+
+module.exports.getCategoryPosts = function(req, res) {
+
+};
+
+
 module.exports.getClips = function(req, res) {
   const { user } = req.params;
 
@@ -95,6 +116,7 @@ module.exports.getClips = function(req, res) {
       sendJsonResponse(res, 200, parsePosts(posts));
     })
 };
+
 
 module.exports.updateClip = function(req, res) {
   const { id } = req.params;
@@ -127,6 +149,7 @@ module.exports.updateClip = function(req, res) {
   }
 }
 
+
 module.exports.deleteClip = function(req, res) {
   const { id } = req.params;
 
@@ -148,6 +171,7 @@ module.exports.deleteClip = function(req, res) {
   }
 }
 
+
 function doAddVote(req, res, post, user, voteValue) {
   if (!post) {
     sendJsonResponse(res, 404, {
@@ -155,7 +179,6 @@ function doAddVote(req, res, post, user, voteValue) {
     });
     return;
   }
-
 
   let voteAlreadyExists = false;
   let preexistingVoteIndex;
@@ -197,6 +220,7 @@ function doAddVote(req, res, post, user, voteValue) {
   )
 
 }
+
 
 module.exports.vote = function(req, res) {
   const { id } = req.params;

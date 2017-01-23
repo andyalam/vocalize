@@ -24,7 +24,7 @@ export const FETCH_CLIPS = 'FETCH_CLIPS';
 export const CLIP_UPLOAD_FAILED = 'CLIP_UPLOAD_FAILED';
 export const VOTE_SUCCESS = 'VOTE_SUCCESS';
 export const VOTE_FAILURE = 'VOTE_FAILURE';
-
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 
 // API config
 let API = 'http://localhost:3000/api';
@@ -233,5 +233,15 @@ export function voteOnClip(clipId, voteValue) {
       .catch(response => {
         dispatch(voteFailure(response));
       });
+  };
+}
+
+
+export function getCategories() {
+  const categories = axios.get(`${API}/categories`);
+
+  return {
+    type: FETCH_CATEGORIES,
+    payload: categories
   };
 }
