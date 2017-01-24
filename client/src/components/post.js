@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { voteOnClip } from '../actions/index';
 import { base64ToBlob } from '../snippets/helpers';
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {
+  Card,
+  CardActions,
+  CardHeader,
+  CardMedia,
+  CardTitle,
+  CardText
+} from 'material-ui/Card';
 import Chip from 'material-ui/Chip';
 import CommunicationCallMade from 'material-ui/svg-icons/communication/call-made';
 import CommunicationCallReceived from 'material-ui/svg-icons/communication/call-received';
@@ -36,7 +44,17 @@ class Post extends Component {
   }
 
   render() {
-    const { user, audio, date, upvotes, downvotes, description, votes, voteHistory } = this.props;
+    const {
+      user,
+      audio,
+      date,
+      upvotes,
+      downvotes,
+      description,
+      votes,
+      voteHistory,
+      category
+    } = this.props;
     let upvoted = 0;
     let downvoted = 0;
     if (voteHistory) {
@@ -49,6 +67,11 @@ class Post extends Component {
 
     return (
       <Card className="post">
+        <Link to={`/categories/${category.category}`}>
+          <Chip className="category">
+            {category.title}
+          </Chip>
+        </Link>
         <div className="post__left">
           <CommunicationCallMade
             className={`upvote active ${upvoted ? 'upvoted' : ''}`}

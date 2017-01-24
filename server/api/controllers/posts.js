@@ -40,6 +40,7 @@ const parsePosts = function(docs, user) {
       votes: voteAmount,
       description: doc.description,
       blobbase64: doc.blobbase64,
+      category: doc.category,
       voteHistory
     });
   });
@@ -57,6 +58,7 @@ module.exports.getPosts = function(req, res) {
 
   Post
     .find({})
+    .populate('category')
     .limit(30)
     .sort({ date: -1 })
     .exec((err, posts) => {
@@ -74,19 +76,30 @@ module.exports.postClip = function(req, res) {
     return;
   }
 
-  const post = new Post({
-    blobbase64: blob,
-    user: username,
-    description: clipName
-  });
+  Category
+    .findOne({ category: 'v', title: 'Vocals' })
+    .exec((err, category) => {
+      if (err) {
+        sendJsonResponse(res, 400, err);
+        return;
+      }
+      console.log(category);
 
-  post.save((err) => {
-    if (err) {
-      sendJsonResponse(res, 400, err);
-      return;
-    }
-    sendJsonResponse(res, 200, {'message': 'file created'});
-  });
+      const post = new Post({
+        blobbase64: blob,
+        user: username,
+        description: clipName,
+        category: category._id
+      });
+
+      post.save((err) => {
+        if (err) {
+          sendJsonResponse(res, 400, err);
+          return;
+        }
+        sendJsonResponse(res, 200, {'message': 'file created'});
+      });
+    });
 };
 
 
