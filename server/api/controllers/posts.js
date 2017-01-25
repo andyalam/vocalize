@@ -20,11 +20,7 @@ const parsePosts = function(docs, user) {
     }, 0);
 
     // vote history if user has voted on this post before
-    let voteHistory = {
-      user: '',
-      positive: '',
-      _id: ''
-    };
+    let voteHistory = {};
     if (user) {
       doc.votes.map(vote => {
         if (vote.user === user) {

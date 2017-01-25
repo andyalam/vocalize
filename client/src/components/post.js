@@ -57,12 +57,14 @@ class Post extends Component {
     } = this.props;
     let upvoted = 0;
     let downvoted = 0;
-    if (voteHistory) {
+    try {
       if (voteHistory.positive.toString() === 'true') {
         upvoted = 1;
       } else if (voteHistory.positive.toString() === 'false') {
         downvoted = 1;
       }
+    } catch (e) {
+      console.log(e);
     }
 
     return (

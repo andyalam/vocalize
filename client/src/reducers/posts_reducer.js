@@ -18,13 +18,17 @@ export default function(state = INITIAL_STATE, action) {
           const currentVote = (positive * 1) ? 1 : -1;
 
           let previousVote = 0;
-          if (post.voteHistory) {
-            previousVote = post.voteHistory.positive * 1 ? 1 : -1;
+          try {
+            if (post.voteHistory.positive.toString()) {
+              previousVote = post.voteHistory.positive * 1 ? 1 : -1;
+            }
+          } catch (e) {
+            console.log(e)
           }
 
-          /*console.log('post.votes', post.votes);
+          console.log('post.votes', post.votes);
           console.log('currentVote', currentVote);
-          console.log('previousVote', previousVote);*/
+          console.log('previousVote', previousVote);
           const newTotalVotes = post.votes + currentVote - previousVote;
 
           return {
