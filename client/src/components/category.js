@@ -1,24 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getPostsOfCategory } from '../actions/index';
 
 import Subheader from 'material-ui/Subheader';
 
 class Category extends Component {
-
-  // TODO: take category from params, trigger action to fetch
-  // posts under that key, populate the category listing
+  componentDidMount() {
+    this.props.getPostsOfCategory(this.props.params.category);
+  }
 
   render() {
     return (
       <div>
         <Subheader>{this.props.params.category}</Subheader>
+        <p>{this.props.cPosts ? this.props.cPosts.length : 'n'} {this.props.title}</p>
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  return {};
+  if (!state.posts.category) {
+    return {};
+  }
+
+  const { cPosts, title } = state.posts.category;
+  return { cPosts, title };
 }
 
-export default connect(mapStateToProps, { })(Category);
+export default connect(mapStateToProps, { getPostsOfCategory})(Category);

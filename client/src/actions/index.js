@@ -25,6 +25,7 @@ export const CLIP_UPLOAD_FAILED = 'CLIP_UPLOAD_FAILED';
 export const VOTE_SUCCESS = 'VOTE_SUCCESS';
 export const VOTE_FAILURE = 'VOTE_FAILURE';
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
+export const FETCH_POSTS_OF_CATEGORY = 'FETCH_POSTS_OF_CATEGORY';
 
 // API config
 let API = 'http://localhost:3000/api';
@@ -243,5 +244,15 @@ export function getCategories() {
   return {
     type: FETCH_CATEGORIES,
     payload: categories
+  };
+}
+
+
+export function getPostsOfCategory(category) {
+  const posts = axios.get(`${API}/categories/${category}`);
+
+  return {
+    type: FETCH_POSTS_OF_CATEGORY,
+    payload: posts
   };
 }

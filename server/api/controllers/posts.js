@@ -110,7 +110,26 @@ module.exports.getCategories = function(req, res) {
 
 
 module.exports.getCategoryPosts = function(req, res) {
+  const categoryType = req.params.category;
 
+  Post
+    .find({})
+    .populate({
+      path: 'category',
+      match: { 'category': categoryType }
+    })
+    .exec((err, posts) => {
+      if(err) {
+        sendJsonResponse(res, 400, err);
+        return;
+      }
+
+      const data = {
+        cPosts: posts,
+        title: categoryType
+      };
+      sendJsonResponse(res, 200, data);
+    });
 };
 
 
@@ -224,8 +243,8 @@ function doAddVote(req, res, post, user, voteValue) {
         user: vote.user,
         postID: post.id
       };
-      console.log('av', arrangedVote);
-      console.log('a user', arrangedVote.user);
+      //console.log('av', arrangedVote);
+      //console.log('a user', arrangedVote.user);
       sendJsonResponse(res, 201, arrangedVote);
     }
   )

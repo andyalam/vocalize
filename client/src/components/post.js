@@ -64,7 +64,7 @@ class Post extends Component {
         downvoted = 1;
       }
     } catch (e) {
-      console.log(e);
+      //console.log(e);
     }
 
     return (
