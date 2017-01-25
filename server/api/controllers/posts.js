@@ -217,12 +217,14 @@ function doAddVote(req, res, post, user, voteValue) {
         sendJsonResponse(res, 400, err);
         return;
       }
-      let vote = post.votes[preexistingVoteIndex ? preexistingVoteIndex : post.votes.length-1]
+      const voteIndex = preexistingVoteIndex || preexistingVoteIndex === 0 ? preexistingVoteIndex : post.votes.length-1;
+      const vote = post.votes[voteIndex]
       arrangedVote = {
         positive: vote.positive,
         user: vote.user,
         postID: post.id
       };
+      console.log('av', arrangedVote);
       console.log('a user', arrangedVote.user);
       sendJsonResponse(res, 201, arrangedVote);
     }
