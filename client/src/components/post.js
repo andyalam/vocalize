@@ -24,7 +24,7 @@ class Post extends Component {
   }
 
   renderAudio() {
-    const contentType = 'audio/ogg';
+    const contentType = 'audio/mpeg';
     const blob = base64ToBlob(this.props.blobbase64, contentType);
     const audioURL = window.URL.createObjectURL(blob);
 
