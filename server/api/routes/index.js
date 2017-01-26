@@ -23,6 +23,7 @@ router.get('/posts/:user', ctrlPosts.getPosts);
 router.post('/posts', auth, ctrlPosts.postClip);
 router.get('/categories', ctrlPosts.getCategories);
 router.get('/categories/:category', ctrlPosts.getCategoryPosts);
+router.get('/categories/:category/:user', ctrlPosts.getCategoryPosts);
 
 router.get('/:user/clips', ctrlPosts.getClips);
 router.put('/clips/:id', auth, ctrlPosts.updateClip);

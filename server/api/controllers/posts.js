@@ -110,13 +110,15 @@ module.exports.getCategories = function(req, res) {
 
 
 module.exports.getCategoryPosts = function(req, res) {
-  const categoryType = req.params.category;
+  const { category, user } = req.params;
 
   Post
     .find({})
+    .limit(30)
+    .sort({ date: -1 })
     .populate({
       path: 'category',
-      match: { 'category': categoryType }
+      match: { 'category': category }
     })
     .exec((err, posts) => {
       if(err) {
@@ -124,10 +126,15 @@ module.exports.getCategoryPosts = function(req, res) {
         return;
       }
 
-      const data = {
-        cPosts: posts,
-        title: categoryType
-      };
+      const cPosts = parsePosts(posts.filter(post => { return post.category }));
+      let title;
+      try {
+        title = cPosts[0].category.title;
+      } catch (e) {
+        title = '';
+      }
+
+      const data = { title, cPosts, user };
       sendJsonResponse(res, 200, data);
     });
 };

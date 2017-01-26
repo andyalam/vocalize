@@ -5,7 +5,7 @@ import {
   FETCH_POSTS_OF_CATEGORY
 } from '../actions/index';
 
-const INITIAL_STATE = { all: [] };
+const INITIAL_STATE = { all: [], category: { cPosts: [] } };
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {

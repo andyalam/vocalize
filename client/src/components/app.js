@@ -9,7 +9,7 @@ export default class App extends Component {
     return (
       <div>
         <Navigation />
-        <div className="container">
+        <div className="container limiter">
           {this.props.children}
         </div>
       </div>
