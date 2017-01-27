@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { createClip } from '../actions/index';
+import { createClip, getCategories } from '../actions/index';
+import { decodeJWT } from '../snippets/helpers';
+
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import { decodeJWT } from '../snippets/helpers';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 import 'style/recorder';
 
@@ -29,7 +32,8 @@ class Recorder extends Component {
       analyser: analyser,
       chunks: [],
       recording: false,
-      recorderError: ''
+      recorderError: '',
+      categoryOption: 0
     };
   }
 
@@ -101,8 +105,10 @@ class Recorder extends Component {
   }
 
   componentDidMount() {
+    this.props.getCategories();
+
     this.setState({
-      canvas: this.refs.canvas
+      canvas: this.refs.canvas,
     });
 
     if (navigator.getUserMedia) {
@@ -181,6 +187,36 @@ class Recorder extends Component {
     });
   }
 
+  handleCategoryOptionChange = (event, index, categoryOption) => {
+    this.setState({categoryOption});
+  }
+
+  renderCategoryoptions = () => {
+    if (!this.props.categories) { return; }
+
+    const menuItems = this.props.categories.map((category, i) => {
+      return (
+        <MenuItem
+          key={category.category}
+          className="select-field__item"
+          value={i}
+          primaryText={category.title}
+        />
+      );
+    });
+
+    return (
+      <SelectField
+        className="select-field"
+        floatingLabelText="Currently uploading to Category"
+        value={this.state.categoryOption}
+        onChange={this.handleCategoryOptionChange}
+      >
+        {menuItems}
+      </SelectField>
+    );
+  }
+
   render() {
     return (
       <section className="main-controls">
@@ -199,6 +235,7 @@ class Recorder extends Component {
         >
           {this.state.recorderError}
         </Dialog>
+        {this.renderCategoryoptions()}
         <canvas ref="canvas" className="visualizer"></canvas>
         <div id="buttons">
           <RaisedButton
@@ -220,8 +257,8 @@ class Recorder extends Component {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { auth: state.auth, categories: state.posts.categories };
 }
 
 
-export default connect(mapStateToProps, { createClip })(Recorder);
+export default connect(mapStateToProps, { createClip, getCategories })(Recorder);
