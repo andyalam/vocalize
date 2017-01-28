@@ -65,7 +65,7 @@ module.exports.getPosts = function(req, res) {
 
 
 module.exports.postClip = function(req, res) {
-  const { blob, username, clipName } = req.body;
+  const { blob, username, clipName, category } = req.body;
 
   if (!blob || !username) {
     sendJsonResponse(res, 400, { message: 'No file found.'});
@@ -73,7 +73,7 @@ module.exports.postClip = function(req, res) {
   }
 
   Category
-    .findOne({ category: 'v', title: 'Vocals' })
+    .findOne({ category })
     .exec((err, category) => {
       if (err) {
         sendJsonResponse(res, 400, err);

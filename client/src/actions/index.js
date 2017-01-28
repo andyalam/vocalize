@@ -123,13 +123,14 @@ function createClipFail(response) {
   };
 }
 
-export function createClip(blob, clipName, username, token) {
+export function createClip(blob, clipName, username, token, category) {
   return dispatch => {
     blobToBase64(blob, (base64) => {
       const payload = {
         blob: base64,
         clipName,
-        username
+        username,
+        category
       };
 
       axios.post(`${API}/posts`, payload)
