@@ -235,7 +235,7 @@ class Recorder extends Component {
         >
           {this.state.recorderError}
         </Dialog>
-        {this.renderCategoryoptions()}
+        { !this.state.recording && this.renderCategoryoptions()}
         <canvas ref="canvas" className="visualizer"></canvas>
         <div id="buttons">
           <RaisedButton
