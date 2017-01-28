@@ -218,6 +218,16 @@ class Recorder extends Component {
   }
 
   render() {
+    /*
+      Everything rendered in this component must be kept light weight,
+      heavier renders must be abstracted up a level to the upload page.
+
+      This is due to the canvas element rerendering very quickly to properly
+      show the dictaphone.
+
+      An alternative method to rendering extras within this component would be
+      rendering conditionally based on this.state.recording === false
+    */
     return (
       <section className="main-controls">
         <Dialog
