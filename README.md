@@ -1,7 +1,5 @@
 # Vocalize
 
-**Currently under heavy development - Not ready for use**
-
 A demo can be found at https://vocalize.herokuapp.com
 The demo is updated inbetween complete feature releases.
 
