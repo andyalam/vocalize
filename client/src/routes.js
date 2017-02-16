@@ -7,9 +7,9 @@ import Categories from './components/categories';
 import Category from './components/category';
 import UploadPage from './components/upload_page';
 import TestComponent from './components/test_component';
-import RegisterPage from './components/register_page';
-import LoginPage from './components/login_page';
-import Logout from './components/logout';
+import RegisterPage from './components/auth/register_page';
+import LoginPage from './components/auth/login_page';
+import Logout from './components/auth/logout';
 
 export default (
   <Route path='/' component={App}>

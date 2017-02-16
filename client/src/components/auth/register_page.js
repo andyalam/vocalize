@@ -5,7 +5,7 @@ import {Card, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { registerUser } from '../actions/index';
+import { registerUser } from '../../actions/index';
 
 import 'style/auth';
 

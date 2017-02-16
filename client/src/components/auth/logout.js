@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { logout } from '../actions/index';
+import { logout } from '../../actions/index';
 
 
 // Basic logout, redirecting to this Component
