@@ -2,14 +2,58 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/index';
 import Post from './post';
-import CircularProgress from 'material-ui/CircularProgress';
+import {
+  CircularProgress, SelectField, MenuItem
+} from 'material-ui';
 
 import 'style/post_listing';
 
 class PostListing extends Component {
+
+  state = {
+    sortSelected: 0,
+    sortOptions: [{
+      key: "new",
+      title: "Newest"
+    }, {
+      key: "top",
+      title: "Top"
+    }]
+  }
+
   componentDidMount() {
     const { username } = this.props.auth;
     this.props.fetchPosts(username);
+  }
+
+  handleSortOptionChange(event, index, sortSelected) {
+    this.setState({ sortSelected });
+  }
+
+  renderSortOptions() {
+    const menuItems = this.state.sortOptions.map((option, i) => {
+      return (
+        <MenuItem
+          key={option.key}
+          className="select-field__item"
+          value={i}
+          primaryText={option.title}
+        />
+      );
+    });
+
+    return (
+      <div className="select-field__holder">
+        <SelectField
+          className="select-field"
+          floatingLabelText="Sorted By"
+          value={this.state.sortSelected}
+          onChange={this.handleSortOptionChange.bind(this)}
+        >
+          {menuItems}
+        </SelectField>
+      </div>
+    );
   }
 
   renderPosts() {
@@ -30,7 +74,8 @@ class PostListing extends Component {
 
   render() {
     return (
-      <div>
+      <div className="post-listing">
+        {this.renderSortOptions()}
         {this.renderPosts()}
       </div>
     )
